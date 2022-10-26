@@ -17,7 +17,7 @@ type User struct {
 	Address    string
 	Birthday   time.Time
 	Gender_ID  uint
-	Persinal   string `gorm:"uniqueIndex"`
+	Personal   string `gorm:"uniqueIndex"`
 	Mobile     string `gorm:"uniqueIndex"`
 	Province   uint
 	Booking    []Booking `gorm:"foreignKey:MemberID"`

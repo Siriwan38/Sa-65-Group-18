@@ -40,7 +40,7 @@ func SetupDatabase() {
 		Address:    "12 Moo 6 ...",
 		Birthday:   time.Now(),
 		Gender_ID:  1,
-		Persinal:   "1234567890098",
+		Personal:   "1234567890098",
 		Mobile:     "0812345678",
 		Province:   23,
 	}
@@ -56,7 +56,7 @@ func SetupDatabase() {
 		Address:    "699 Moo 5 ...",
 		Birthday:   time.Now(),
 		Gender_ID:  2,
-		Persinal:   "1234567893338",
+		Personal:   "1234567893338",
 		Mobile:     "0812340999",
 		Province:   20,
 	}

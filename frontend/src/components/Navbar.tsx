@@ -78,7 +78,7 @@ const toggleDrawer = (state: boolean) => (event: any) => {
               ))}
               <ListItem button onClick={Signout}>
               <ListItemIcon> <ExitToAppIcon/></ListItemIcon>
-              <ListItemText>Sign'out</ListItemText>
+              <ListItemText>Sign out</ListItemText>
               </ListItem>
 
             </List>
