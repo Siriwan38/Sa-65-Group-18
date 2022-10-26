@@ -23,19 +23,19 @@ func CreateBooking(c *gin.Context) {
 
 	//10: ค้นหา User ด้วย id
 	if tx := entity.DB().Where("id = ?", Booking.MemberID).First(&User); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "video not found"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "user not found"})
 		return
 	}
 
 	// 11: ค้นหา Room ด้วย id
 	if tx := entity.DB().Where("id = ?", Booking.RoomID).First(&Room); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "resolution not found"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "room not found"})
 		return
 	}
 
 	// 12: ค้นหา Usage ด้วย id
 	if tx := entity.DB().Where("id = ?", Booking.UsageID).First(&Usage); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "playlist not found"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "usage not found"})
 		return
 	}
 
