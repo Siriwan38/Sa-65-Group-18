@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
-// import { createStyles, makeStyles, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
@@ -16,16 +15,9 @@ import { BookingInterface } from "../models/IUser";
 import { format } from 'date-fns'
 import moment from 'moment';
 
-// const useStyles = makeStyles((theme: Theme) =>
-//  createStyles({
-//    container: {marginTop: theme.spacing(2)},
-//    table: { minWidth: 650},
-//    tableSpace: {marginTop: 20},
-//  })
-// );
+
  
 function Booking() {
-//  const classes = useStyles();
  const [booking, setBooking] = React.useState<BookingInterface[]>([]);
  
  const getBooking = async () => {
