@@ -1,49 +1,51 @@
 import React, { useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import FormControl from "@material-ui/core/FormControl";
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
+import TextField from "@mui/material/TextField";
+import Button from '@mui/material/Button';
+import FormControl from "@mui/material/FormControl";
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { BookingInterface, RoomInterface, UsageInterface, MemberInterface } from "../models/IUser";
-import {MuiPickersUtilsProvider,KeyboardDateTimePicker,} from "@material-ui/pickers";
+//import {MuiPickersUtilsProvider,KeyboardDateTimePicker,} from "@mui/material/pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import DateFnsUtils from "@date-io/date-fns";
-import Select from "@material-ui/core/Select";
-import { MenuItem } from '@material-ui/core';
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { MenuItem } from '@mui/material';
 
 function Alert(props: AlertProps) {
  return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
-const useStyles = makeStyles((theme: Theme) =>
- createStyles({
-   root: {flexGrow: 1},
-   container: {marginTop: theme.spacing(2)},
-   paper: {padding: theme.spacing(2),color: theme.palette.text.secondary},
- })
-);
+// const useStyles = makeStyles((theme: Theme) =>
+//  createStyles({
+//    root: {flexGrow: 1},
+//    container: {marginTop: theme.spacing(2)},
+//    paper: {padding: theme.spacing(2),color: theme.palette.text.secondary},
+//  })
+// );
 function UserCreate() {
- const classes = useStyles();
+//  const classes = useStyles();
  const [selectedDate, setSelectedDate] = React.useState<Date | null>(
    new Date()
  );
 
 
- const  [AddedTime,setAddedTime] = React.useState<Date>(new Date());
- const handleAddedTime = (date: Date | null) => {
+ const  [AddedTime,setAddedTime] = React.useState<Date | null>(new Date());
+ const handleAddedTime = (date: Date | null | undefined) => {
   if (!date) {
     return
   }
    setAddedTime(date);
  }
- const  [AddedTime1,setAddedTime1] = React.useState<Date>(new Date());
- const handleAddedTime1 = (date: Date | null ) => {
+ const  [AddedTime1,setAddedTime1] = React.useState<Date | null>(new Date());
+ const handleAddedTime1 = (date: Date | null | undefined) => {
   if (!date){
     return
   }
@@ -56,7 +58,7 @@ function UserCreate() {
  const [usage, setUsage] = React.useState<UsageInterface[]>([]);
  const [success, setSuccess] = React.useState(false);
  const [error, setError] = React.useState(false);
- const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+ const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
    if (reason === "clickaway") {
      return;
    }
@@ -77,7 +79,7 @@ function UserCreate() {
 
 
  const handleChange = (
-  event: React.ChangeEvent<{ name?: string; value: unknown }>
+  event: SelectChangeEvent<number>
 ) => {
   const name = event.target.name as keyof typeof booking;
   setBooking({
@@ -161,6 +163,10 @@ const getMember = async () => {
 };
 
  function submit() {
+  if (!AddedTime1 || !AddedTime) {
+    setError(true);
+    return
+  }
   if (AddedTime1 < AddedTime){
     setError(true);
     return 
@@ -200,7 +206,7 @@ const getMember = async () => {
 }, []);
 
  return (
-   <Container className={classes.container} maxWidth="md">
+   <Container sx={{ marginTop: 2}} maxWidth="md">
      <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
        <Alert onClose={handleClose} severity="success">
          บันทึกข้อมูลสำเร็จ
@@ -211,7 +217,7 @@ const getMember = async () => {
          บันทึกข้อมูลไม่สำเร็จ
        </Alert>
      </Snackbar>
-     <Paper className={classes.paper}>
+     <Paper sx={{ padding: 2, color: "text.secondary" }}>
        <Box display="flex">
          <Box flexGrow={1}>
            <Typography
@@ -225,7 +231,7 @@ const getMember = async () => {
          </Box>
        </Box>
        <Divider />
-       <Grid container spacing={3} className={classes.root}>
+       <Grid container spacing={3} sx={{ flexGrow: 1}}>
          <Grid item xs={6}>
            <p>First Name</p>
            <FormControl fullWidth variant="outlined">
@@ -299,33 +305,29 @@ const getMember = async () => {
          <Grid item xs={3}>
            <FormControl fullWidth variant="outlined">
              <p>วันที่และเวลาที่เริ่มจองใช้ห้อง</p>
-             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-               <KeyboardDateTimePicker
-                 name="AddedTime"
+             <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DateTimePicker
                  value={AddedTime}
-                 onChange={handleAddedTime}
+                 onChange={(newValue) => handleAddedTime(newValue)}
                  minDate={new Date("2018-01-01T00:00")}
-                 format="yyyy/MM/dd HH:mm "
-                 fullWidth
+                 renderInput={(params) => <TextField {...params} />}
                  ampm = {false}
                />
-             </MuiPickersUtilsProvider>
+             </LocalizationProvider>
            </FormControl>
          </Grid>
          <Grid item xs={3}>
            <FormControl fullWidth variant="outlined">
              <p>วันที่และเวลาที่เลิกจองใช้ห้อง</p>
-             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-               <KeyboardDateTimePicker
-                 name="AddedTime1"
+             <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DateTimePicker
                  value={AddedTime1}
-                 onChange={handleAddedTime1}
+                 onChange={(newValue) => handleAddedTime1(newValue)}
                  minDate={new Date("2018-01-01T00:00")}
-                 format="yyyy/MM/dd HH:mm "
-                 fullWidth
+                 renderInput={(params) => <TextField {...params} />}
                  ampm = {false}
                />
-             </MuiPickersUtilsProvider>
+             </LocalizationProvider>
            </FormControl>
          </Grid>
          <Grid item xs={12}>

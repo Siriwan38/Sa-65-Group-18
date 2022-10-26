@@ -1,26 +1,26 @@
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
+// import { createStyles, makeStyles, Theme } from "@mui/material/styles";
+import Container from "@mui/material/Container";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      marginTop: theme.spacing(2),
-    },
-    table: {
-      minWidth: 650,
-    },
-    tableSpace: {
-      marginTop: 20,
-    },
-  })
-);
+// const useStyles = makeStyles((theme: Theme) =>
+//   createStyles({
+//     container: {
+//       marginTop: theme.spacing(2),
+//     },
+//     table: {
+//       minWidth: 650,
+//     },
+//     tableSpace: {
+//       marginTop: 20,
+//     },
+//   })
+// );
 
 function Home() {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   return (
     <div>
-      <Container className={classes.container} maxWidth="md">
+      <Container sx={{ marginTop: 2}} maxWidth="md">
         <h1 style={{ textAlign: "center" }}>ระบบบันทึกการจองใช้ห้อง </h1>
         <h4><u>Requirements</u></h4>
         <p>
