@@ -1,3 +1,5 @@
+import { UsersInterface } from "./IUser";
+
 export interface BookingInterface {
     ID: number,
     
@@ -11,7 +13,7 @@ export interface BookingInterface {
 	Usage:   UsageInterface;
 
     MemberID: number;
-    Member: MemberInterface;
+    Member: UsersInterface;
    }
 
    export interface RoomInterface{
@@ -28,18 +30,3 @@ export interface BookingInterface {
     Name: string;
     
    }
-   export interface MemberInterface{
-    ID: number;
-    Member_ID: number;
-	Prefix_ID: number;
-	First_Name: string;
-	Last_Name: string;
-	Email: string; 
-	Address: string;
-	Birthday:   Date;
-	Gender_ID: number;
-	Persinal: string;
-	Mobile: string;
-	Province: number;
-	Booking:   BookingInterface[];
-}

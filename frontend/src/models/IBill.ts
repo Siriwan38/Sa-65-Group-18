@@ -1,25 +1,16 @@
-export interface UserInterface {
-    ID: number;
-    Name: string;
-    Email: string;
-    Password: string;
+import { EmployeesInterface } from "./IUser";
+import { FoodOrderedsInterface } from "./IFoodorder";
+import { FoodOrderedFoodSetsInterface } from "./IFoodorder";
+import { FoodSetsInterface } from "./IFoodorder";
+import { BookingInterface } from "./IBooking";
 
-    Bills: BillsInterface[];
-}
 export interface PaymentsInterface {
     ID: number;
     Name: string;
 
     Bill: BillsInterface[];
 }
-export interface EmployeesInterface {
-    ID: number;
-    Name: string;
-    Email: string;
-    Password: string;
 
-    Bills: BillsInterface[];
-}
 export interface BillsInterface {
     ID: number;
     BillTime: Date;
@@ -30,55 +21,17 @@ export interface BillsInterface {
     PaymentType: PaymentsInterface;
 
     BookingID: number;
-    Booking : BookingsInterface;
+    Booking: BookingInterface;
 
     FoodOrderedID: number;
     FoodOrdered: FoodOrderedsInterface;
 
-    TotalPrice: number;
-}
-export interface FoodOrderedsInterface {
-   
-    ID: number;
-    Name: string;
-    FoodTime: Date;
-    TotalPrice: number;
-
-    BookingID: number;
-    Booking: BookingsInterface;
-
-    FoodOrderedFoodSets: FoodOrderedFoodSetsInterface[];
-}
-
-export interface FoodOrderedFoodSetsInterface {
-    ID: number;
+    FoodOrderedFoodSetsID:  number;
+    FoodOrderedFoodSets:    FoodOrderedFoodSetsInterface;
 
     FoodSetID: number;
     FoodSet: FoodSetsInterface;
 
-    FoodOrderedID: number;
-    FoodOrdered: FoodOrderedsInterface;
-
-    Quantity: number;
-}
-export interface FoodSetsInterface {
-    ID: number;
-    Name: string;
-    Detail: string;
-    Price: number;
-}
-
-export interface BookingsInterface {
-    ID: number;
-    BookingTimeStart: Date;
-    BookingTimeStop: Date;
-    Room: string;
     TotalPrice: number;
-    
-    UserID: number;
-    User: UserInterface;
-
-    FoodOrdereds: FoodOrderedsInterface[];
-    
-    
 }
+

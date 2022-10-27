@@ -1,3 +1,5 @@
+import { EmployeesInterface } from "./IUser";
+
 export interface RoomInterface {
     ID: number;
     Number: string;
@@ -11,16 +13,8 @@ export interface RoomInterface {
     PeriodID: number;
     Period: PeriodInterface;
     EmployeeID: number;
-    Employee: EmployeeInterface;
+    Employee: EmployeesInterface;
 
-}
-
-export interface EmployeeInterface {
-    ID: number;
-    First_Name: string;
-    Last_Name: string;
-    Email: string;
-    Password: string;
 }
 
 export interface TypeInterface {

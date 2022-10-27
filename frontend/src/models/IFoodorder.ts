@@ -1,8 +1,4 @@
-
-/*  Interface มีเอาไว้ทำอะไร ? Ans. เป็นการกำหนดโครงสร้างของข้อมูล
-    เวลาเราเรียกใช้มันจะได้หาชื่อได้ง่าย
-    key ลัด : command + . => ทำ quick fiq แล้วก็กด auto import
-*/
+import { BookingInterface } from "./IBooking";
 
 export interface FoodOrderedsInterface {
     ID: number;
@@ -13,7 +9,7 @@ export interface FoodOrderedsInterface {
     FoodPaymentType: FoodPaymentTypesInterface;
 
     BookingID: number;
-    Booking: BookingsInterface;
+    Booking: BookingInterface;
 
     FoodOrderedFoodSets: FoodOrderedFoodSetsInterface[];
 
@@ -33,20 +29,6 @@ export interface FoodOrderedFoodSetsInterface {
     Quantity: number;
 }
 
-export interface BookingsInterface {
-    ID: number;
-    Room: string;
-
-    BookingTimeStart: Date;
-    BookingTimeStop: Date;
-
-    MemberID: number;
-    Member: UsersInterface;     //มันเป็น Object
-
-    FoodOrdereds: FoodOrderedsInterface[];  //Interface FoodOrdered มันรับเป็น Array
-}
-
-
 export interface FoodPaymentTypesInterface {
     ID: number;
     Name: string;
@@ -62,17 +44,4 @@ export interface FoodSetsInterface {
     Price: number;
 
     FoodOrderedFoodSets: FoodOrderedFoodSetsInterface[];
-}
-export interface UsersInterface {
-
-    ID: string,
-   
-    FirstName: string;
-    LastName: string;
-    Email: string;
-    Password: string;
-    BirthDay: Date | null;
-    Mobile: string;
-    Identification: string;
-    Address: string;
 }

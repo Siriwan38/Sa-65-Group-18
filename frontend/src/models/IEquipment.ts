@@ -1,3 +1,5 @@
+import { EmployeesInterface } from "./IUser";
+
 export interface EquipmentInterface {
     ID?: number;
     Name?: string;
@@ -10,13 +12,7 @@ export interface EquipmentInterface {
     EmployeeID?: number;
     Employee?: EmployeesInterface
   }
-  export interface EmployeesInterface {
-    ID?: number,
-    FirstName?: string,
-    LastName?: string,
-    Email?: string,
-    Password?: string
-  }
+  
   export interface CategoriesInterface {
     ID: number,
     Name: string,
