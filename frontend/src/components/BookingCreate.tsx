@@ -11,8 +11,9 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import { BookingInterface, RoomInterface, UsageInterface, MemberInterface } from "../models/IBooking";
-//import {MuiPickersUtilsProvider,KeyboardDateTimePicker,} from "@mui/material/pickers";
+import { BookingInterface, UsageInterface} from "../models/IBooking";
+import { RoomInterface } from "../models/IRoom";
+import { UsersInterface } from "../models/IUser";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
@@ -23,19 +24,10 @@ import { MenuItem } from '@mui/material';
 function Alert(props: AlertProps) {
  return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
-// const useStyles = makeStyles((theme: Theme) =>
-//  createStyles({
-//    root: {flexGrow: 1},
-//    container: {marginTop: theme.spacing(2)},
-//    paper: {padding: theme.spacing(2),color: theme.palette.text.secondary},
-//  })
-// );
-function UserCreate() {
-//  const classes = useStyles();
+function BookingCreate() {
  const [selectedDate, setSelectedDate] = React.useState<Date | null>(
    new Date()
  );
-
 
  const  [AddedTime,setAddedTime] = React.useState<Date | null>(new Date());
  const handleAddedTime = (date: Date | null | undefined) => {
@@ -53,7 +45,7 @@ function UserCreate() {
  }
 
  const [booking, setBooking] = React.useState<Partial<BookingInterface>>({});
- const [member, setMember] = React.useState<MemberInterface>();
+ const [member, setMember] = React.useState<UsersInterface>();
  const [room, setRoom] = React.useState<RoomInterface[]>([]);
  const [usage, setUsage] = React.useState<UsageInterface[]>([]);
  const [success, setSuccess] = React.useState(false);
@@ -98,7 +90,6 @@ const getRoom = async () => {
     },
   };
 
-  
 
   fetch(apiUrl, requestOptions)
     .then((response) => response.json())
@@ -241,7 +232,7 @@ const getMember = async () => {
                variant="outlined"
                type="string"
                size="medium"
-               value={member?.First_Name || ""}
+               value={member?.FirstName || ""}
                onChange={handleInputChange}
              />
            </FormControl>
@@ -255,7 +246,7 @@ const getMember = async () => {
                variant="outlined"
                type="string"
                size="medium"
-               value={member?.Last_Name || ""}
+               value={member?.LastName || ""}
                onChange={handleInputChange}
              />
            </FormControl>
@@ -348,4 +339,4 @@ const getMember = async () => {
    </Container>
  );
 }
-export default UserCreate;
+export default BookingCreate;

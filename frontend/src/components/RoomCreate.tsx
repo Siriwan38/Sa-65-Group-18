@@ -1,4 +1,3 @@
-
 import React, {useEffect} from 'react';
 import { Link as RouterLink } from "react-router-dom";
 import TextField from "@mui/material/TextField";
@@ -12,7 +11,8 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import { RoomInterface,EmployeeInterface,TypeInterface,BuildingInterface,ServiceDayInterface,PeriodInterface} from "../models/IRoom";
+import { RoomInterface,TypeInterface,BuildingInterface,ServiceDayInterface,PeriodInterface} from "../models/IRoom";
+import { EmployeesInterface } from '../models/IUser';
 import MenuItem from '@mui/material/MenuItem';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -24,7 +24,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 
 function RoomCreate() {
  const [room, setRoom] = React.useState<Partial<RoomInterface>>({});
- const [employee, setEmployee] = React.useState<EmployeeInterface>();
+ const [employee, setEmployee] = React.useState<EmployeesInterface>();
  const [type, setType] = React.useState<TypeInterface[]>([]);
  const [building,setBuilding] = React.useState<BuildingInterface[]>([]);
  const [serviceday, setServiceDay] = React.useState<ServiceDayInterface[]>([]);

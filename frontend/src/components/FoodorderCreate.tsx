@@ -23,11 +23,9 @@ import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import { BookingsInterface } from "../models/IBooking";
-import { FoodPaymentTypesInterface } from "../models/IFoodPaymentType";
-import { FoodSetsInterface } from "../models/IFoodSet";
-import { FoodOrderedFoodSetsInterface, FoodOrderedsInterface } from "../models/IFoodOrdered";
-
+import { BookingInterface } from "../models/IBooking";
+import { FoodPaymentTypesInterface } from "../models/IFoodorder";
+import { FoodOrderedFoodSetsInterface, FoodOrderedsInterface, FoodSetsInterface } from "../models/IFoodorder";
 
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -37,23 +35,12 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-/* UI ของระบบการสั่งอาหารว่าง
-    ตัวแปรสำหรับรับค่า Interface Ex. const [bookings, setBookings] = React.useState<BookingsInterface[]>([]);
-    เป็น array เพราะเป็นข้อมูลหลายตัว 
-    ([]); => ตัวนี้หมายถึงค่าเริ่มต้นของตัวแปร (เรากำหนดให้เป็น array ว่างเปล่าไปก่อน)
-    ###################################################################################################
-    ใช้คำว่า export นำหน้าเพราะว่าเราจะเอาไปใช้ในไฟล์อื่นต่อ (ไฟล์ App.tsx)
-    ส่วน default หมายความว่าเราสามารถเอาชื่อฟังก์ชันนี้ไปใช้ได้เลย (หมายถึงจะได้รู้ว่าฟังก์ชันนี้ ตัว default มันอยู่หน้าไหนอะ)
-*/
-
 export default function FoodOrderedCreate() {
-  //Set Function
-  // const [bookings, setBookings] = React.useState<BookingsInterface[]>([]);
-  const [booking, setBooking] = React.useState<BookingsInterface>();
+  const [booking, setBooking] = React.useState<BookingInterface>();
   const [foodPaymenyTypes, setFoodPaymentTypes] = React.useState<FoodPaymentTypesInterface[]>([]);
   const [foodSets, setFoodSets] = React.useState<FoodSetsInterface[]>([]);
   const [selectedFoodSet, setSelectedFoodSet] = React.useState<FoodSetsInterface | null>();
-  const [selectedBooking, setSelectedBooking] = React.useState<BookingsInterface[]>([]);
+  const [selectedBooking, setSelectedBooking] = React.useState<BookingInterface[]>([]);
   const [foodOrdered, setFoodOrdered] = React.useState<Partial<FoodOrderedsInterface>>({
     BookingID: 1, FoodPaymentTypeID: 0, FoodOrderedFoodSets: [], FoodTime: new Date(),  TotalPrice: 0          // แก้ตอนรวม
   });
@@ -74,28 +61,28 @@ export default function FoodOrderedCreate() {
 
   //Get Function
   const getBookings = async () => {
-    const apiUrl = "http://localhost:8080/booking/1";       //Port Backend (path get bookings) ***แก้ตอนรวมไฟล์
+    const apiUrl = "http://localhost:8080/booking/1";       
     const requestOptions = {
-      method: "GET",                                       //วิธีการที่ทำ
+      method: "GET",                                       
       headers: {
-        "Content-Type": "application/json",                //ติดต่อสื่อสารกันโดยใช้ json (ถ้าไม่ใช้ json ก็อาจจจะเป็น HTML, Text, Pics ไรงี้)
+        "Content-Type": "application/json",                
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
     }
 
-    fetch(apiUrl, requestOptions)                          //เรียกใช้ฟังก์ชัน fetch ในการดึงข้อมูล (input เป็น apiUrl,RequestInfo เป็น requestOptions)
-      .then(response => response.json())                   //พอหลังบ้าน respon กลับมาเราก็จะทำการ then ข้อมูลที่ได้จากหลังบ้าน โดยเริ่มจากการแปลงข้อมูลให้เป็น json 
+    fetch(apiUrl, requestOptions)                          
+      .then(response => response.json())                   
       .then(res => {
-        console.log(res);                                  //console log ดูว่าข้อมูลที่ได้จากหลังบ้านเป็นหน้าตายังไง
-        if (res.data) {                                    //มันติดต่อกันผ่าน path /bookins ใช่ป้ะ มันก็เลยจะวิ่งไปที่ controller booking (List)ใน Backend อะ
-          setBooking(res.data);                           //โดยตัว respone ที่เราได้จาก backend มันก็จะมี data กับ error ซึ่งถ้ามันมี data ส่งมาอะมันก็จะ
-        } else {                                           //มันก็จะเอาค่าไปเก็บไว้ใน setBookings (Set function ที่เรากำหนดไว้ก่อนหน้านี้อะ)
+        console.log(res);                                  
+        if (res.data) {                                    
+          setBooking(res.data);                           
+        } else {                                           
           console.log(res.error);
         }
       })
   }
 
-  const getFoodSets = async () => {                       //Get ตามหน้า UI อะ ไล่ไปเรื่อย
+  const getFoodSets = async () => {                       
     const apiUrl = "http://localhost:8080/foodsets";
     const requestOptions = {
       method: "GET",
@@ -147,7 +134,7 @@ export default function FoodOrderedCreate() {
     }
     console.log(foodOrdered);
 
-    // return
+    
     const apiUrl = "http://localhost:8080/foodordereds";
     const requestOptions = {
       method: "POST",
@@ -233,31 +220,20 @@ export default function FoodOrderedCreate() {
     setFoodOrdered({...foodOrdered, [name]: event.target.value});
   }
 
-  /* useEffect มี 2 Parameter 
-      1. () => {} เป็นการดึงฟังก์ชัน Get ที่เราต้องใช้มาใช้
-      2. [] Array ว่างเปล่าตัวนี้หมายความ มันจะเป็นการเรียกใช้ useEffect แค่ครั้งเดียว ก็คือดึงข้อมูลแต่ละตัวมาแค่ครั้งเดียว 
-      (หมายถึงดึงมาเฉพาะตอนเปิดหน้า Create)
-  */
-
   useEffect(() => {
     getBookings();
     getFoodSets();
     getFoodPaymentTypes();
-    // if(foodOrdered.BookingID == 0) return;
-    // setSelectedBooking(bookings.find(b => b.ID === foodOrdered.BookingID))
+    
   }, []);
 
-  // console.log(foodOrdered);
+  
   console.log(selectedFoodSet);
 
-  /* ส่วนของ AutoComplete (กรุณาใส่ตัว set ตรง Option ให้ตรง)
-      Ex. const [foodSets, setFoodSets] = React.useState<FoodSetsInterface[]>([]); 
-          เวลาใส่ก็ options={foodSets}
-  */
 
   return (
     <Container maxWidth="md">
-      {/* <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }} />     */}
+      
       <Snackbar
         open={success}
         autoHideDuration={6000}
@@ -311,17 +287,6 @@ export default function FoodOrderedCreate() {
               sx={{ maxWidth: 300 }}
               renderInput={(params) => <TextField {...params} label="รายการอาหารว่าง" />}
             />
-            {/* <Select
-              inputProps={{
-                name: "FoodSetID"
-              }}
-              value={selectedFoodSet!.ID}
-              onChange={(e: SelectChangeEvent<number>) => { setSelectedFoodSet(foodSets.find(fs => fs.ID === e.target.value) as FoodSetsInterface); }}
-            >
-              {foodSets.map((foodS: FoodSetsInterface) => (
-                <MenuItem key={foodS.ID} value={foodS.ID}>{foodS.Name}</MenuItem>
-              ))}
-            </Select> */}
             <Button
               variant="contained"
               onClick={addToOrder}
@@ -370,17 +335,6 @@ export default function FoodOrderedCreate() {
               sx={{ maxWidth: 300 }}
               renderInput={(params) => <TextField {...params} label="วิธีการชำระเงิน" />}
             />
-            {/* <Select
-              inputProps={{
-                name: "FoodPaymentTypeID"
-              }}
-              value={foodOrdered.FoodPaymentTypeID}
-              onChange={handleSelectChange}
-            >
-              {foodPaymenyTypes.map((payment: FoodPaymentTypesInterface) => (
-                <MenuItem key={payment.ID} value={payment.ID}>{payment.Name}</MenuItem>
-              ))}
-            </Select> */}
           </Grid>
           <Grid item xs={3}>
             <TextField

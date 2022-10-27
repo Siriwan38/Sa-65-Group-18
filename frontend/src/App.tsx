@@ -19,9 +19,7 @@ export default function App() {
   if (!token) {
     return <SignIn />;
   }
-
   
-
  return (
    <Router>
     {token && (<div>

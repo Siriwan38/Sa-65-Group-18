@@ -1,22 +1,6 @@
-// import { createStyles, makeStyles, Theme } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 
-// const useStyles = makeStyles((theme: Theme) =>
-//   createStyles({
-//     container: {
-//       marginTop: theme.spacing(2),
-//     },
-//     table: {
-//       minWidth: 650,
-//     },
-//     tableSpace: {
-//       marginTop: 20,
-//     },
-//   })
-// );
-
 function Home() {
-  // const classes = useStyles();
 
   return (
     <div>

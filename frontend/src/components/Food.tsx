@@ -12,21 +12,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import moment from "moment";
-import { FoodOrderedsInterface, FoodOrderedFoodSetsInterface } from "../models/IFoodOrdered";
-
-
-
-// const TableHead = withStyles(theme => ({
-//   root: {
-//     backgroundColor: 'primary'
-//   }
-// }))
+import { FoodOrderedsInterface, FoodOrderedFoodSetsInterface} from "../models/IFoodorder";
 
 function Food() {
   const [foodOrdereds, setFoodOrdereds] = React.useState<FoodOrderedsInterface[]>([]);
 
-  //เเก้เป็น getfood
-  //รับข้อมูลมาจาก DB
   const getfood = async () => {
     const apiUrl = `http://localhost:8080/foodordereds`;
     const requestOptions = {
@@ -37,7 +27,6 @@ function Food() {
       },
     };
 
-    //การกระทำ
     fetch(apiUrl, requestOptions)
       .then((response) => response.json())
       .then((res) => {
@@ -50,8 +39,6 @@ function Food() {
       });
   };
 
-  //เพื่อให้มีการดึงข้อมูลใส่ combobox ตอนเริ่มต้นเเค่ครั้งเดียว
-  //
   useEffect(() => {
     getfood();
   }, []);
@@ -108,7 +95,7 @@ function Food() {
                 <React.Fragment>
                   <TableRow key={foodOrderItem.ID}>
                     <TableCell align="left">{foodOrderItem.ID}</TableCell>
-                    <TableCell align="left">{foodOrderItem.Booking.Room}</TableCell>
+                    <TableCell align="left">{foodOrderItem.Booking.Room}</TableCell>          
                     <TableCell align="center">{foodOrderItem.FoodPaymentType.Name}</TableCell>
                     <TableCell align="center">{foodOrderItem.TotalPrice}</TableCell>
                     <TableCell align="center">

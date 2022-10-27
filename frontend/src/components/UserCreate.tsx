@@ -16,16 +16,16 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Snackbar from "@mui/material/Snackbar";
-import { PrefixesInterface } from "../models/IPrefixes";
+import { PrefixesInterface } from "../models/IUser";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import { UsersInterface } from "../models/IBooking";
+import { UsersInterface } from "../models/IUser";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Icon } from "@mui/material";
-import { EmployeesInterface } from "../models/IEmployee";
-import { GendersInterface } from "../models/IGender";
-import { ProvincesInterface } from "../models/IProvince";
+import { EmployeesInterface } from "../models/IUser";
+import { GendersInterface } from "../models/IUser";
+import { ProvincesInterface } from "../models/IUser";
 import Users from "./Users";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
@@ -34,8 +34,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props,
 
 function UserCreate() {
 
-  // ประกาศตัวแปร prefixes และ setPrefixes สำหรับเก็บค่าจาก PrefixesInterface
-  // setPrefixes เป็นตัว set ค่าจาก PrefixesInterface เข้าไปที่ตัวแปร prefixes
+  
   const [prefixes, setPrefixes] = React.useState<PrefixesInterface[]>([])
   const [employee, setEmployee] = React.useState<Partial<EmployeesInterface>>({
     First_Name: "", Last_Name: ""
@@ -43,9 +42,6 @@ function UserCreate() {
   const [genders, setGenders] = React.useState<GendersInterface[]>([])
   const [provinces, setProvinces] = React.useState<ProvincesInterface[]>([])
 
-  // const [date, setDate] = React.useState<Date | null>(null);
-
-  // setUser จะเป็นตัว check ข้อมูลให้ตัวแปร user ว่าได้รับข้อมูลที่ต้องการมาแล้วหรือยัง
   const [user, setUser] = React.useState<Partial<UsersInterface>>({
     ProvinceID: 0, NamePrefixID: 0, EmployeeID: 0, GenderID: 0, BirthDay: new Date(),
     FirstName: "", LastName: "", Email: "", Password: "", Identification: "", Mobile: "",
@@ -65,31 +61,19 @@ function UserCreate() {
     setError(false);
   };
 
-  // const Item = styled(Paper)(({ theme }) => ({
-  //   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  //   ...theme.typography.body2,
-  //   padding: theme.spacing(1),
-  //   textAlign: 'center',
-  //   color: theme.palette.text.secondary,
-  // }));
-
-  // setUser ทำการเก็บข้อมูลจาก combobox ไปเก็บที่ตัวแปร user
   const handleSelectChange = (event: SelectChangeEvent<number>) => {
     const name = event.target.name as keyof typeof UserCreate;
     const { value } = event.target;
     setUser({ ...user, [name]: value });
   }
 
-  // setUser ทำการเก็บข้อมูลจาก textfield ไปเก็บที่ตัวแปร user
+  
   const handleInputChange = (event: React.ChangeEvent<{ id?: string; value: any }>) => {
     const id = event.target.id as keyof typeof UserCreate;
     const { value } = event.target;
     setUser({ ...user, [id]: value });
   };
 
-  // หน้า UserCreate
-  // หน้าบ้าน จะใช้ JSON สื่อสารกันกับ หลังบ้าน
-  // หน้าบ้านจะแนบ header(content-type) เพื่อติดต่อไปยังหลังงบ้านที่ method GET
   const getPrefix = async () => {
     const apiUrl = "http://localhost:8080/nameprefixes";
     const requestOptions = {
@@ -100,23 +84,20 @@ function UserCreate() {
       }
     };
 
-    // หลังบ้านรับ request มา
-    // หลังบ้าน check data
+    
+
     fetch(apiUrl, requestOptions)
       .then((response) => response.json())
       .then((res) => {
         if (res.data) {
-          setPrefixes(res.data);  // ข้อมูลถูกต้อง setPrefixes จะ set ค่าไปที่ตัวแปร prefixes
+          setPrefixes(res.data);  
         } else {
-          console.log(res.error); // ข้อมูลไม่ถูกต้อง จะแสดงค่า error ที่ console
+          console.log(res.error); 
         }
       });
   }
 
 
-  // หน้า UserCreate
-  // หน้าบ้าน จะใช้ JSON สื่อสารกันกับ หลังบ้าน
-  // หน้าบ้านจะแนบ header(content-type) เพื่อติดต่อไปยังหลังงบ้านที่ method GET
   const getEmployee = async () => {
     const apiUrl = `http://localhost:8080/employee/${localStorage.getItem("id")}`;
     const requestOptions = {
@@ -128,16 +109,16 @@ function UserCreate() {
     };
 
 
-    // หลังบ้านรับ request มา
-    // หลังบ้าน check data
+    
+
     fetch(apiUrl, requestOptions)
       .then((response) => response.json())
       .then((res) => {
         console.log(res);
         if (res.data) {
-          setEmployee(res.data);   // ข้อมูลถูกต้อง setRoles จะ set ค่าไปที่ตัวแปร roles
+          setEmployee(res.data);   
         } else {
-          console.log(res.error); // ข้อมูลไม่ถูกต้อง จะแสดงค่า error ที่ console
+          console.log(res.error); 
         }
       });
   }
@@ -186,7 +167,6 @@ function UserCreate() {
 
   function submit() {
 
-    // ตัวแปร data เป็นตัวรับข้อมูลจากตัวแปร user เพื่อส่งไปหลังบ้าน
     let data = {
       FirstName: user.FirstName ?? "",
       LastName: user.LastName ?? "",
@@ -202,8 +182,7 @@ function UserCreate() {
       EmployeeID: employee.ID,
     };
 
-    // หน้าบ้าน จะใช้ JSON สื่อสารกันกับ หลังบ้าน
-    // หน้าบ้านจะแนบ header(content-type) และ body(app-json) เพื่อติดต่อไปยังหลังงบ้านที่ method POST
+    
     const apiUrl = "http://localhost:8080/users";
     const requestOptions = {
       method: "POST",
@@ -215,53 +194,22 @@ function UserCreate() {
     };
 
 
-    // หลังบ้านรับ request มา
-    // หลังบ้าน check data
+    
     fetch(apiUrl, requestOptions)
       .then((response) => response.json())
       .then((res) => {
         if (res.data) {
-          console.log(res.data);    // ข้อมูลถูกต้อง บันทึกข้อมูลที่หลังบ้านและแสดงข้อมูลที่ console
-          setSuccess(true);       // แสดง pop up การทำงานสำเร็จ
-          // loginRegisted();      // เป็นการ login เข้าระบบแบบ auto
+          console.log(res.data);    
+          setSuccess(true);       
+          
         } else {
-          setError(true);       // ข้อมูลไม่ถูกต้อง แสดง pop up การทำงานไม่สำเร็จ
-          console.log(res.error); // ข้อมูลไม่ถูกต้อง จะแสดงค่า error ที่ console
+          setError(true);       
+          console.log(res.error); 
         }
       });
   }
 
-  // const loginRegisted = () => {
-
-  //   // ตัวแปร payload จะรับข้อมูล email และ password จาก textfield ที่ลงทะเบียน
-  //   let payload = {
-  //     Email: user.Email ?? "",
-  //     Password: user.Password ?? "",
-  //   }
-
-  // // ที่หน้า Login
-  // // หน้าบ้าน จะใช้ JSON สื่อสารกันกับ หลังบ้าน
-  // // หน้าบ้านจะแนบ header(content-type) และ body(app-json) เพื่อติดต่อไปยังหลังงบ้านที่ method POST
-  //   const apiUrl = "http://localhost:8080/login";
-  //   const requestOptions = {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(payload),
-  //   };
-
-  //   fetch(apiUrl, requestOptions)
-  //     .then((response) => response.json())
-  //     .then((res) => {
-  //       if (res.data) {
-  //         localStorage.setItem("token", res.data.token);   // setItem จะ set ค่า token ไปที่ Local storage
-  //         localStorage.setItem("id", res.data.id);  // setItem จะ set ค่า id ไปที่ Local storage
-  //       } else {
-  //         console.log(res.error);
-  //       }
-  //     });
-  // }
-
-  // เรียกใช้ฟังก์ชันเหล่านี้ ขณะกำลังสร้าง user
+  
   useEffect(() => {
     getPrefix();
     getEmployee();
@@ -395,7 +343,6 @@ function UserCreate() {
           <Grid item xs={3} sx={{ textAlign: 'right' }}><p>Employee</p></Grid>
           <Grid item xs={3}>
             <FormControl fullWidth>
-              {/* <InputLabel>Employee</InputLabel> */}
               <TextField disabled label="Employee" value={`${employee?.First_Name}  ${employee?.Last_Name}`}></TextField>
             </FormControl>
           </Grid>

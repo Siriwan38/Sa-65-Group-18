@@ -1,4 +1,5 @@
 import { UsersInterface } from "./IUser";
+import { RoomInterface } from "./IRoom";
 
 export interface BookingInterface {
     ID: number,
@@ -16,15 +17,6 @@ export interface BookingInterface {
     Member: UsersInterface;
    }
 
-   export interface RoomInterface{
-    ID: number; 
-    Name: string;
-    Type: number;
-    Bulding: number;
-    Serviceday: number;
-    Period: number;
-
-   }
    export interface UsageInterface{
     ID: number;
     Name: string;

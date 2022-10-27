@@ -9,8 +9,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
 function Users() {
 
-  // ประกาศตัวแปร users และ setUsers สำหรับเก็บค่าจาก UsersInterface
-  // setUsers เป็นตัว set ค่าจาก UsersInterface เข้าไปที่ตัวแปร users
+  
  const [users, setUsers] = React.useState<UsersInterface[]>([]);
 
  const getUsers = async () => {
@@ -19,20 +18,20 @@ function Users() {
      method: "GET", 
      headers: { 
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`    // login เพื่อเอาข้อมูลให้หลังบ้าน check เป็นการระบุตัวตน
+      Authorization: `Bearer ${localStorage.getItem("token")}`    
     },
    };
 
-   // หลังบ้าน check token และ ข้อมูล
+   
    fetch(apiUrl, requestOptions)
      .then((response) => response.json())
      .then((res) => {
        console.log(res);
        if (res.data) {
-         setUsers(res.data);  // ข้อมูลถูกต้อง หลังบ้านจะส่งข้อมูลมาตามที่ขอ
+         setUsers(res.data);  
        }
        else{
-        console.log(res.error);  // ข้อมูลไม่ถูกต้อง จะแสดงค่า error ที่ console เช่น token หรือ ข้อมูลไม่ถูกต้อง ก็จะแสดงค่าของข้อมูลตัวนั้น
+        console.log(res.error);  
        }
      });
  };
@@ -53,7 +52,7 @@ function Users() {
    { field: "Employee", headerName: "Employee", width: 96, valueGetter: (params) => { return params.row.Employee.First_Name + " " + params.row.Employee.Last_Name} },
  ];
  
- // เมื่อมีการ log out ฟังก์ชันนี้จะทำการ clear token ใน local storage และเปลี่ยน path ไปที่หน้า log in
+ 
  const logOut = () => {
   localStorage.clear();
   window.location.href = "/login";

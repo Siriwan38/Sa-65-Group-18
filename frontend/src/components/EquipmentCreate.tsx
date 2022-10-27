@@ -17,10 +17,10 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-import { CategoriesInterface } from "../interfaces/Icategory";
-import { EmployeesInterface } from "../interfaces/Iemployees";
-import { UnitsInterface } from "../interfaces/Iunit";
-import { EquipmentInterface } from "../interfaces/Iequipment";
+import { CategoriesInterface } from "../models/IEquipment";
+import { EmployeesInterface } from "../models/IUser";
+import { UnitsInterface } from "../models/IEquipment";
+import { EquipmentInterface } from "../models/IEquipment";
 
 import {
   GetCategory,
@@ -101,8 +101,6 @@ function EquipmentCreate() {
     getUnit();
     getEmployee();
   }, []);
-
-  // console.log(equipment);
   
   const convertType = (data: string | number | undefined) => {
     let val = typeof data === "string" ? parseInt(data) : data;

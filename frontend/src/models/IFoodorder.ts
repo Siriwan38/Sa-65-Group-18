@@ -16,7 +16,6 @@ export interface FoodOrderedsInterface {
     TotalPrice: number;
 }
 
-// เอาสองตารางนี้ไว้ด้วยกันเพราะมันเป็นตารางบันทึกทั้งคู่
 export interface FoodOrderedFoodSetsInterface {
     ID: number;
 
@@ -29,13 +28,6 @@ export interface FoodOrderedFoodSetsInterface {
     Quantity: number;
 }
 
-export interface FoodPaymentTypesInterface {
-    ID: number;
-    Name: string;
-
-    FoodOrdereds: FoodOrderedsInterface[];
-}
-
 export interface FoodSetsInterface {
     ID: number;
 
@@ -45,3 +37,11 @@ export interface FoodSetsInterface {
 
     FoodOrderedFoodSets: FoodOrderedFoodSetsInterface[];
 }
+
+export interface FoodPaymentTypesInterface {
+    ID: number;
+    Name: string;
+
+    FoodOrdereds: FoodOrderedsInterface[];
+}
+

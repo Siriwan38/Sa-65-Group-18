@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-
 import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -12,36 +11,35 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Snackbar from "@mui/material/Snackbar";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-
 import { BillsInterface } from "../models/IBill";
-import { BookingsInterface } from "../models/IBooking";
-import { EmployeesInterface } from "../models/IEmployee";
-import { FoodOrderedFoodSetsInterface, FoodOrderedsInterface } from "../models/IFoodordered";
-import { PaymentsInterface } from "../models/IPayment";
+import { BookingInterface } from "../models/IBooking";
+import { EmployeesInterface } from "../models/IUser";
+import { FoodOrderedFoodSetsInterface, FoodOrderedsInterface} from "../models/IFoodorder";
+import { PaymentsInterface } from "../models/IBill";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import Button from "@mui/material/Button";
-import moment from "moment";
+//import moment from "moment";
+
 
 export default function BillCreate() {
   const [employee, setEmployee] = React.useState<EmployeesInterface>();
   const [foodordered, setFoodordered] = React.useState<FoodOrderedsInterface[]>(
     []
   );
-  const [booking, setBooking] = React.useState<BookingsInterface[]>([]);
+  const [booking, setBooking] = React.useState<BookingInterface[]>([]);
   const [paymentTypes, setPaymentType] = React.useState<PaymentsInterface[]>(
     []
   );
   const [selectedBooking, setSelectedBooking] =
-    React.useState<BookingsInterface>();
+    React.useState<BookingInterface>();
 
   const [bill, setBill] = React.useState<Partial<BillsInterface>>({
     BookingID: 0,
@@ -163,7 +161,8 @@ export default function BillCreate() {
     let data = {
       EmployeeID: employee?.ID,
       BookingID: bill.BookingID,
-      FoodOrderedID: booking.find((b) => b.ID === bill.BookingID)?.FoodOrdereds[0].ID,
+      FoodOrderedID: foodordered.FoodOrderedID,
+      // FoodOrderedID: booking.find((b) => b.ID === bill.BookingID)?.FoodOrdereds[0].ID,
       PaymentTypeID: bill.PaymentTypeID,
       BillTime: bill.BillTime,
       TotalPrice: bill.TotalPrice,
@@ -202,7 +201,6 @@ export default function BillCreate() {
       booking.find((b) => b.ID === bill.BookingID)?.TotalPrice ?? 0;
     let foodOrderedPrice =
       booking.find((b) => b.ID === bill.BookingID)?.FoodOrdereds[0].TotalPrice ?? 0;
-      // foodordered.find((f) => f.ID === bill.FoodOrderedID)?.TotalPrice ?? 0;
 
     setBill({ ...bill, TotalPrice: bookingPrice + foodOrderedPrice });
   };
@@ -269,7 +267,7 @@ export default function BillCreate() {
             <p>พนักงานระบบ</p>
           </Grid>
           <Grid item xs={6}>
-            <TextField disabled id="Name" value={employee?.Name} />
+            <TextField disabled id="Name" value={employee?.First_Name} />
           </Grid>
           <Grid item xs={4}>
             <p>ห้องที่ต้องการชำระเงิน</p>
@@ -283,9 +281,9 @@ export default function BillCreate() {
               }}
               onChange={handleSelectChange}
             >
-              {booking.map((item: BookingsInterface) => (
+              {booking.map((item: BookingInterface) => (
                 <MenuItem key={item.ID} value={item.ID}>
-                  {item.Room}
+                  {item.booking.Room}
                 </MenuItem>
               ))}
             </Select>
@@ -294,26 +292,12 @@ export default function BillCreate() {
             <p>ชื่อผู้ใช้งาน</p>
           </Grid>
           <Grid item xs={8}>
-            <TextField disabled id="Name" value={selectedBooking?.User.Name} />
+            <TextField disabled id="Name" value={selectedBooking?.Member.FirstName} />
           </Grid>
           <Grid item xs={4}>
             <p>รายการสั่งอาหาร</p>
           </Grid>
           <Grid item xs={8}>
-            {/* <Select
-              id="FoodOrderedID"
-              value={bill.FoodOrderedID}
-              inputProps={{
-                name: "FoodOrderedID",
-              }}
-              onChange={handleSelectChange}
-            >
-              {foodordered.map((item: FoodOrderedsInterface) => (
-                <MenuItem key={item.ID} value={item.ID}>
-                  {item.Name}
-                </MenuItem>
-              ))}
-            </Select> */}
             <TableContainer component={Paper} sx={{ marginTop: 4 }}>
               <Table sx={{ miinWidth: 650 }} aria-label="simple table">
                 <TableHead>
@@ -340,11 +324,6 @@ export default function BillCreate() {
                       <TableCell align="center">{foodOrder.FoodSet.Name}</TableCell>
                       <TableCell align="center">{foodOrder.Quantity}</TableCell>
                       <TableCell align="center">{foodOrder.Quantity * foodOrder.FoodSet.Price}</TableCell>
-                      {/* 
-                      <TableCell align="center">{foodOrder.TotalPrice}</TableCell>
-                      <TableCell align="center">
-                        {moment(foodOrder.FoodTime).format("DD/MM/YYYY HH:mm")}
-                      </TableCell> */}
                     </TableRow>
                   ))}
                 </TableBody>

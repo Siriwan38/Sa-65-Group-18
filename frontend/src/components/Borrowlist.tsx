@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { BorrowListInterface } from "../models/IBorrowList";
+import { BorrowListInterface } from "../models/IBorrowlist";
 import { GetBorrowList } from "../services/HttpClientService";
 import moment from "moment";
 

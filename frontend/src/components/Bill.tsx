@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
-
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
@@ -19,8 +18,6 @@ import { BillsInterface } from "../models/IBill";
 function Bills() {
   const [bills, setBills] = React.useState<BillsInterface[]>([]);
 
-  //เเก้เป็น getbill
-  //รับข้อมูลมาจาก DB
   const getBills = async () => {
     const apiUrl = `http://localhost:8080/bills`;
     const requestOptions = {
@@ -31,7 +28,6 @@ function Bills() {
       },
     };
 
-    //การกระทำ
     fetch(apiUrl, requestOptions)
       .then((response) => response.json())
       .then((res) => {
@@ -44,8 +40,6 @@ function Bills() {
       });
   };
 
-  //เพื่อให้มีการดึงข้อมูลใส่ combobox ตอนเริ่มต้นเเค่ครั้งเดียว
-  //
   useEffect(() => {
     getBills();
   }, []);
@@ -92,9 +86,6 @@ function Bills() {
                 <TableCell align="center" width="15%">
                   Booking
                 </TableCell>
-                {/* <TableCell align="center" width="20%">
-                  Food Ordered
-                </TableCell> */}
                 <TableCell align="center" width="20%">
                   Total Price
                 </TableCell>
@@ -111,7 +102,6 @@ function Bills() {
                   <TableCell align="left">{bill.Employee.Name}</TableCell>
                   <TableCell align="center">{bill.PaymentType.Name}</TableCell>
                   <TableCell align="center">{bill.Booking.Room}</TableCell>
-                  {/* <TableCell align="center">{bill.FoodOrdered.Name}</TableCell> */}
                   <TableCell align="center">
                     {bill.TotalPrice}
                   </TableCell>

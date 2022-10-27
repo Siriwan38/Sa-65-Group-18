@@ -103,9 +103,9 @@ function Booking() {
                <TableRow key={user.ID}>
                  <TableCell align="center">{user.ID}</TableCell>
                  <TableCell align="left" size="medium">
-                   {user.Member.First_Name}
+                   {user.Member.FirstName}
                  </TableCell>
-                 <TableCell align="left">{user.Member.Last_Name}</TableCell>
+                 <TableCell align="left">{user.Member.LastName}</TableCell>
                  <TableCell align="left">{user.Room.Name}</TableCell>
                  <TableCell align="left">{user.Usage.Name}</TableCell>
                  <TableCell align="center">{moment(user.BookingTimeStart).format( 'DD MMMM yyyy HH:mm ')}</TableCell>
