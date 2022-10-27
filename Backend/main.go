@@ -1,19 +1,19 @@
 package main
 
 import (
+	"github.com/Siriwan38/Sa-65-Group-18/controller"
+	controller_booking "github.com/Siriwan38/Sa-65-Group-18/controller/Booking"
+	controller_borrowlist "github.com/Siriwan38/Sa-65-Group-18/controller/Borrowlist"
+	controller_equipment "github.com/Siriwan38/Sa-65-Group-18/controller/Equipment"
+	controller_foodorder "github.com/Siriwan38/Sa-65-Group-18/controller/Foodorder"
+	controller_payment "github.com/Siriwan38/Sa-65-Group-18/controller/Payment"
+	controller_room "github.com/Siriwan38/Sa-65-Group-18/controller/Room"
 	"github.com/gin-gonic/gin"
-	"github.com/siriwan38/sa-65-example/controller"
-	controller_booking "github.com/siriwan38/sa-65-example/controller/Booking"
-	controller_borrowlist "github.com/siriwan38/sa-65-example/controller/Borrowlist"
-	controller_equipment "github.com/siriwan38/sa-65-example/controller/Equipment"
-	controller_foodorder "github.com/siriwan38/sa-65-example/controller/Foodorder"
-	controller_payment "github.com/siriwan38/sa-65-example/controller/Payment"
-	controller_room "github.com/siriwan38/sa-65-example/controller/Room"
 
-	controller_user "github.com/siriwan38/sa-65-example/controller/User"
+	controller_user "github.com/Siriwan38/Sa-65-Group-18/controller/User"
 
-	"github.com/siriwan38/sa-65-example/entity"
-	"github.com/siriwan38/sa-65-example/middlewares"
+	"github.com/Siriwan38/Sa-65-Group-18/entity"
+	"github.com/Siriwan38/Sa-65-Group-18/middlewares"
 )
 
 func main() {
@@ -52,6 +52,8 @@ func main() {
 			protected.POST("/createbooking", controller_booking.CreateBooking)
 			protected.GET("/booking", controller_booking.ListBooking)
 			protected.GET("/usage", controller_booking.ListUsage)
+			protected.GET("/bookings/bill", controller_booking.ListBookingforBill)
+			protected.GET("/bookings/bill/:id", controller_booking.GetBookingforBill)
 
 			//Borrowlist
 			protected.POST("/createborrowlist", controller_borrowlist.CreateBorrowList)

@@ -3,8 +3,8 @@ package controller
 import (
 	"net/http"
 
+	"github.com/Siriwan38/Sa-65-Group-18/entity"
 	"github.com/gin-gonic/gin"
-	"github.com/siriwan38/sa-65-example/entity"
 )
 
 /* Get คือดึงตาม id ที่ส่งไป(ส่งไปหรือส่งมาว้ะ 5555) ส่วน list คือดึงทั้งหมด*/

@@ -24,10 +24,10 @@ type Bill struct {
 	PaymentType   PaymentType
 
 	BookingID *uint   `gorm:"uniqueIndex"`
-	Booking   Booking `gorm:"constraint:OnDelete:CASCADE"` //belong to ลบใบลงทะเบียน บิลหาย
+	Booking   Booking `gorm:"constraint:OnDelete:CASCADE"`
 
-	FoodOrderedID *uint
-	FoodOrdered   FoodOrdered
+	// FoodOrderedID *uint
+	// FoodOrdered   FoodOrdered
 
 	TotalPrice uint
 }

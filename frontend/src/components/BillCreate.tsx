@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
@@ -20,14 +19,20 @@ import TableRow from "@mui/material/TableRow";
 import { BillsInterface } from "../models/IBill";
 import { BookingInterface } from "../models/IBooking";
 import { EmployeesInterface } from "../models/IUser";
-import { FoodOrderedFoodSetsInterface, FoodOrderedsInterface} from "../models/IFoodorder";
+import { FoodOrderedsInterface, FoodOrderedFoodSetsInterface } from "../models/IFoodorder";
 import { PaymentsInterface } from "../models/IBill";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import Button from "@mui/material/Button";
-//import moment from "moment";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
 
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export default function BillCreate() {
   const [employee, setEmployee] = React.useState<EmployeesInterface>();
@@ -161,8 +166,7 @@ export default function BillCreate() {
     let data = {
       EmployeeID: employee?.ID,
       BookingID: bill.BookingID,
-      FoodOrderedID: foodordered.FoodOrderedID,
-      // FoodOrderedID: booking.find((b) => b.ID === bill.BookingID)?.FoodOrdereds[0].ID,
+      FoodOrderedID: booking.find((b) => b.ID === bill.BookingID)?.FoodOrderedFoodSets[0].ID,
       PaymentTypeID: bill.PaymentTypeID,
       BillTime: bill.BillTime,
       TotalPrice: bill.TotalPrice,
@@ -198,9 +202,10 @@ export default function BillCreate() {
 
   const sumTotalPrice = () => {
     let bookingPrice =
-      booking.find((b) => b.ID === bill.BookingID)?.TotalPrice ?? 0;
+      booking.find((b) => b.ID === bill.BookingID)?.Room.Type.Price ?? 0;
     let foodOrderedPrice =
-      booking.find((b) => b.ID === bill.BookingID)?.FoodOrdereds[0].TotalPrice ?? 0;
+      booking.find((b) => b.ID === bill.BookingID)?.FoodOrderedFoodSets[0].TotalPrice ?? 0;
+      // foodordered.find((f) => f.ID === bill.FoodOrderedID)?.TotalPrice ?? 0;
 
     setBill({ ...bill, TotalPrice: bookingPrice + foodOrderedPrice });
   };
@@ -208,7 +213,7 @@ export default function BillCreate() {
   useEffect(() => {
     getEmployee();
     getBooking();
-    getFoodOrdered();
+    //getFoodOrdered();
     getPaymentType();
   }, []);
 
@@ -269,6 +274,7 @@ export default function BillCreate() {
           <Grid item xs={6}>
             <TextField disabled id="Name" value={employee?.First_Name} />
           </Grid>
+
           <Grid item xs={4}>
             <p>ห้องที่ต้องการชำระเงิน</p>
           </Grid>
@@ -283,7 +289,7 @@ export default function BillCreate() {
             >
               {booking.map((item: BookingInterface) => (
                 <MenuItem key={item.ID} value={item.ID}>
-                  {item.booking.Room}
+                  {item.Room.Name}
                 </MenuItem>
               ))}
             </Select>
@@ -318,12 +324,17 @@ export default function BillCreate() {
                 </TableHead>
 
                 <TableBody>
-                  {selectedBooking?.FoodOrdereds[0].FoodOrderedFoodSets.map((foodOrder: FoodOrderedFoodSetsInterface) => (
+                  {selectedBooking?.FoodOrderedFoodSets[0].FoodOrderedFoodSets.map((foodOrder: FoodOrderedFoodSetsInterface) => (
                     <TableRow key={foodOrder.ID}>
                       <TableCell align="left">{foodOrder.FoodSet.ID}</TableCell>
                       <TableCell align="center">{foodOrder.FoodSet.Name}</TableCell>
                       <TableCell align="center">{foodOrder.Quantity}</TableCell>
                       <TableCell align="center">{foodOrder.Quantity * foodOrder.FoodSet.Price}</TableCell>
+                      {/* 
+                      <TableCell align="center">{foodOrder.TotalPrice}</TableCell>
+                      <TableCell align="center">
+                        {moment(foodOrder.FoodTime).format("DD/MM/YYYY HH:mm")}
+                      </TableCell> */}
                     </TableRow>
                   ))}
                 </TableBody>

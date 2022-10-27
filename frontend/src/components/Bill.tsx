@@ -99,9 +99,9 @@ function Bills() {
               {bills.map((bill: BillsInterface) => (
                 <TableRow key={bill.ID}>
                   <TableCell align="left">{bill.ID}</TableCell>
-                  <TableCell align="left">{bill.Employee.Name}</TableCell>
+                  <TableCell align="left">{bill.Employee.First_Name}</TableCell>
                   <TableCell align="center">{bill.PaymentType.Name}</TableCell>
-                  <TableCell align="center">{bill.Booking.Room}</TableCell>
+                  <TableCell align="center">{bill.Booking.Room.Type.Price}</TableCell>
                   <TableCell align="center">
                     {bill.TotalPrice}
                   </TableCell>

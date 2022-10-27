@@ -3,8 +3,8 @@ package controller
 import (
 	"net/http"
 
+	"github.com/Siriwan38/Sa-65-Group-18/entity"
 	"github.com/gin-gonic/gin"
-	"github.com/siriwan38/sa-65-example/entity"
 )
 
 // POST /Booking
@@ -65,4 +65,41 @@ func ListBooking(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": Booking})
+}
+
+// GET /bookings/bill----> list
+func ListBookingforBill(c *gin.Context) {
+	var bookings []entity.Booking
+	if err := entity.DB().Raw("SELECT * FROM Bookings").
+		Preload("Member").
+		Preload("Room").
+		Preload("Room.Type").
+		Preload("FoodOrdereds").
+		Preload("FoodOrdereds.FoodOrderedFoodSets").
+		Preload("FoodOrdereds.FoodOrderedFoodSets.FoodSet").
+		Find(&bookings).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": bookings})
+}
+
+// GET /booking/bill/:id
+func GetBookingforBill(c *gin.Context) {
+	id := c.Param("id")
+	var booking entity.Booking
+	if err := entity.DB().Raw("SELECT * FROM bookings WHERE id = ? ORDER BY room ASC", id).
+		Preload("Member").
+		Preload("Room").
+		Preload("Room.Type").
+		Preload("FoodOrdereds").
+		Preload("FoodOrdereds.FoodOrderedFoodSets").
+		Preload("FoodOrdereds.FoodOrderedFoodSets.FoodSet").
+		Find(&booking).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": booking})
 }

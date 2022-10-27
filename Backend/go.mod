@@ -1,4 +1,4 @@
-module github.com/siriwan38/sa-65-example
+module github.com/Siriwan38/Sa-65-Group-18
 
 go 1.17
 

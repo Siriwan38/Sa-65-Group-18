@@ -3,8 +3,8 @@ package controller
 import (
 	"net/http"
 
+	"github.com/Siriwan38/Sa-65-Group-18/entity"
 	"github.com/gin-gonic/gin"
-	"github.com/siriwan38/sa-65-example/entity"
 )
 
 func ListType(c *gin.Context) {

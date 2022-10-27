@@ -8,8 +8,8 @@ import (
 
 type Usage struct {
 	gorm.Model
-	Name    string
-	Booking []Booking `gorm:"foreignKey:UsageID"`
+	Name     string
+	Bookings []Booking `gorm:"foreignKey:UsageID"`
 }
 type Booking struct {
 	gorm.Model
@@ -22,6 +22,9 @@ type Booking struct {
 
 	UsageID *uint
 	Usage   Usage
+
+	Bills        []Bill        `gorm:"foreignKey:BookingID"`
+	FoodOrdereds []FoodOrdered `gorm:"foreignKey:BookingID"`
 
 	BookingTimeStart time.Time
 	BookingTimeStop  time.Time

@@ -1,5 +1,6 @@
 import { UsersInterface } from "./IUser";
 import { RoomInterface } from "./IRoom";
+import { FoodOrderedsInterface } from "./IFoodorder";
 
 export interface BookingInterface {
     ID: number,
@@ -15,6 +16,8 @@ export interface BookingInterface {
 
     MemberID: number;
     Member: UsersInterface;
+
+    FoodOrderedFoodSets: FoodOrderedsInterface[];
    }
 
    export interface UsageInterface{
