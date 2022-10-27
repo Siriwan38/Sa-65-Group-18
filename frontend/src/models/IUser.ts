@@ -1,45 +1,41 @@
-export interface BookingInterface {
-    ID: number,
+
+export interface UsersInterface {
+    ID: string,
     
-    BookingTimeStart: Date 
-    BookingTimeStop: Date 
-   
-    RoomID: number;
-	Room:   RoomInterface;
-
-    UsageID: number;
-	Usage:   UsageInterface;
-
-    MemberID: number;
-    Member: MemberInterface;
-   }
-
-   export interface RoomInterface{
-    ID: number; 
-    Name: string;
-    Type: number;
-    Bulding: number;
-    Serviceday: number;
-    Period: number;
-
-   }
-   export interface UsageInterface{
-    ID: number;
-    Name: string;
-    
-   }
-   export interface MemberInterface{
-    ID: number;
-    Member_ID: number;
-	Prefix_ID: number;
-	First_Name: string;
-	Last_Name: string;
-	Email: string; 
-	Address: string;
-	Birthday:   Date;
-	Gender_ID: number;
-	Persinal: string;
-	Mobile: string;
-	Province: number;
-	Booking:   BookingInterface[];
+    NamePrefixID: number
+    NamePrefix: PrefixesInterface
+    FirstName: string;
+    LastName: string;
+    EmployeeID: number
+    Employee: EmployeesInterface
+    Identification: string
+    Email: string;
+    Password: string
+    BirthDay: Date | null;
+    GenderID: number
+    Gender: GendersInterface
+    Mobile: string
+    Address: string
+    ProvinceID: number
+    Province: ProvincesInterface
+}   
+export interface ProvincesInterface {
+    ID: number
+    ProvinceName: string
 }
+export interface PrefixesInterface {
+    ID: number
+    PrefixName: string
+}
+export interface GendersInterface{
+    ID: number
+    GenderName: string
+}
+export interface EmployeesInterface {
+    ID: number
+    First_Name: string
+    Last_Name:  string
+    Email:  string
+    Password:   string
+}
+

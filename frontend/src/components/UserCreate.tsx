@@ -18,7 +18,7 @@ import Divider from "@mui/material/Divider";
 import Snackbar from "@mui/material/Snackbar";
 import { PrefixesInterface } from "../models/IPrefixes";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import { UsersInterface } from "../models/IUser";
+import { UsersInterface } from "../models/IBooking";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";

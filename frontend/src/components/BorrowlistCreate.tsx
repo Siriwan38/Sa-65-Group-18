@@ -18,7 +18,7 @@ import '../App.css';
 import { BorrowListInterface } from "../models/IBorrowList";
 import { EquipmentInterface } from "../models/IEquipment";
 import { EmployeeInterface } from "../models/IEmployee";
-import { UsersInterface } from "../models/IUser";
+import { UsersInterface } from "../models/IBooking";
 
 import {
   GetEmployee,

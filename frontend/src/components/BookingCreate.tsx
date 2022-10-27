@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import { BookingInterface, RoomInterface, UsageInterface, MemberInterface } from "../models/IUser";
+import { BookingInterface, RoomInterface, UsageInterface, MemberInterface } from "../models/IBooking";
 //import {MuiPickersUtilsProvider,KeyboardDateTimePicker,} from "@mui/material/pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";

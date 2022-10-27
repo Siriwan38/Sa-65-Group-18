@@ -11,7 +11,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { BookingInterface } from "../models/IUser";
+import { BookingInterface } from "../models/IBooking";
 import { format } from 'date-fns'
 import moment from 'moment';
 

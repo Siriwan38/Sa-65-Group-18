@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import { UsersInterface } from "../models/IUser";
+import { UsersInterface } from "../models/IBooking";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
 function Users() {
