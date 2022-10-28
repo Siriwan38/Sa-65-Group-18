@@ -17,12 +17,12 @@ import FoodorderCreate from "./components/FoodorderCreate";
 import Room from "./components/Room";
 import RoomCreate from "./components/RoomCreate";
 
-import Bill from "./components/BookingHistory";
+import Bill from "./components/Bill";
 import BillCreate from "./components/BillCreate";
 
 export default function App() {
 
-  const [token, setToken] = React.useState<String>("");
+  const [token, setToken] = React.useState<String | null>("");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -32,7 +32,6 @@ export default function App() {
   }, []);
 
   if (!token) {
-
     return <SignIn />;
   }
   
@@ -52,7 +51,7 @@ export default function App() {
          <Route path="/equipmentscreate" element={<EquipmentCreate />} />
 
          <Route path="/food" element={<Food />} />
-         <Route path="/foodordercreate" element={<FoodorderCreate />} />
+         <Route path="/foodordercreate/:bookingId" element={<FoodorderCreate />} />
 
          <Route path="/room" element={<Room />} />
          <Route path="/roomcreate" element={<RoomCreate />} />

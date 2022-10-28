@@ -20,7 +20,7 @@ func CreateEquipment(c *gin.Context) {
 	}
 	//9: ค้นหา Employee ด้วย id
 	if tx := entity.DB().Where("id = ?", equipment.EmployeeID).First(&employee); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "category not found"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "employee not found"})
 		return
 	}
 	//10: ค้นหา Category ด้วย id

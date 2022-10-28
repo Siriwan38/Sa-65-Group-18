@@ -87,6 +87,9 @@ function Bills() {
                   Booking
                 </TableCell>
                 <TableCell align="center" width="20%">
+                  Food Ordered
+                </TableCell>
+                <TableCell align="center" width="20%">
                   Total Price
                 </TableCell>
                 <TableCell align="center" width="20%">
@@ -102,6 +105,7 @@ function Bills() {
                   <TableCell align="left">{bill.Employee.First_Name}</TableCell>
                   <TableCell align="center">{bill.PaymentType.Name}</TableCell>
                   <TableCell align="center">{bill.Booking.Room.Type.Price}</TableCell>
+                  <TableCell align="center">{bill.Booking.FoodOrdereds[0]?.TotalPrice ?? 0}</TableCell>
                   <TableCell align="center">
                     {bill.TotalPrice}
                   </TableCell>

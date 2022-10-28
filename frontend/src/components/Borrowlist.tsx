@@ -41,7 +41,7 @@ function BorrowList() {
       { field: "Employee",
         headerName: "Author",
         width: 150,
-        valueGetter: (params) => params.row.Employee.FirstName,
+        valueGetter: (params) => params.row.Employee.First_Name,
       },
       { field: "BorrowTime", headerName: "Borrow Time", width: 200,
         valueGetter: (params) => moment(params.row.BorrowTime).format("DD/MM/YYYY HH:mm") },

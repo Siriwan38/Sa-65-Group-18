@@ -51,6 +51,7 @@ func main() {
 			//Booking
 			protected.POST("/createbooking", controller_booking.CreateBooking)
 			protected.GET("/booking", controller_booking.ListBooking)
+			protected.GET("/booking/:id", controller_booking.GetBooking)
 			protected.GET("/usage", controller_booking.ListUsage)
 			protected.GET("/bookings/bill", controller_booking.ListBookingforBill)
 			protected.GET("/bookings/bill/:id", controller_booking.GetBookingforBill)
@@ -76,10 +77,12 @@ func main() {
 			protected.GET("/foodordereds", controller_foodorder.ListFoodOrdereds)
 			protected.GET("/foodordered/:id", controller_foodorder.GetFoodOrdered)
 			protected.POST("/foodordereds", controller_foodorder.CreateFoodOrdered)
+
 			// Food set Routes
 			protected.GET("/foodsets", controller_foodorder.ListFoodSets)
 			protected.GET("/foodset/:id", controller_foodorder.GetFoodSet)
 			protected.POST("/foodsets", controller_foodorder.CreateFoodSet)
+
 			// Food payment type Routes
 			protected.GET("/foodpayment_types", controller_foodorder.ListFoodPaymentTypes)
 			protected.GET("/foodpayment_type/:id", controller_foodorder.GetFoodPaymentType)
@@ -88,6 +91,7 @@ func main() {
 			//Payment
 			protected.GET("/bills", controller_payment.ListBill)
 			protected.POST("/bills", controller_payment.Createbill)
+			protected.GET("/payment_types", controller_payment.GetPaymentType)
 
 			//Room
 			protected.POST("/createroom", controller_room.CreateRoom) //

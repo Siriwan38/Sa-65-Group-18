@@ -21,9 +21,13 @@ import DateFnsUtils from "@date-io/date-fns";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { MenuItem } from '@mui/material';
 
-function Alert(props: AlertProps) {
- return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 function BookingCreate() {
  const [selectedDate, setSelectedDate] = React.useState<Date | null>(
    new Date()
@@ -129,7 +133,7 @@ const getUsage = async () => {
 };
 
 const getMember = async () => {
-  const apiUrl = `http://localhost:8080/member/${localStorage.getItem("id")}`;
+  const apiUrl = `http://localhost:8080/user/${localStorage.getItem("id")}`;
   const requestOptions = {
     method: "GET",
     headers: {
@@ -322,7 +326,7 @@ const getMember = async () => {
            </FormControl>
          </Grid>
          <Grid item xs={12}>
-           <Button component={RouterLink} to="/history" variant="contained">
+           <Button component={RouterLink} to="/bookinghistory" variant="contained">
              Back
            </Button>
            <Button

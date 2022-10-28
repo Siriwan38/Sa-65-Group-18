@@ -54,7 +54,7 @@ function Equipments() {
       field: "Employee",
       headerName: "พนักงาน",
       width: 250,
-      valueGetter: (params) => `${params.row.Employee.FirstName}  ${params.row.Employee.LastName}`,
+      valueGetter: (params) => `${params.row.Employee.First_Name}  ${params.row.Employee.Last_Name}`,
     },
     { field: "Time", headerName: "วันที่และเวลา", width: 250,
       valueFormatter: (params) => moment(params.value.Time)},

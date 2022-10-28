@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import FormControl from '@mui/material/FormControl';
@@ -48,6 +49,8 @@ export default function FoodOrderedCreate() {
   const [success, setSuccess] = React.useState(false);
   const [error, setError] = React.useState(false);
 
+  const { bookingId } = useParams();
+
   const handleClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
@@ -61,7 +64,7 @@ export default function FoodOrderedCreate() {
 
   //Get Function
   const getBookings = async () => {
-    const apiUrl = "http://localhost:8080/booking/1";       
+    const apiUrl = `http://localhost:8080/booking/${bookingId}`;       
     const requestOptions = {
       method: "GET",                                       
       headers: {
@@ -269,7 +272,7 @@ export default function FoodOrderedCreate() {
             <TextField
               disabled
               id="Room"
-              value={booking?.Room}
+              value={booking?.Room?.Name}
             />
           </Grid>
           <Grid item xs={4}>

@@ -63,7 +63,7 @@ function Booking() {
          <Box>
            <Button
              component={RouterLink}
-             to="/create"
+             to="/bookingcreate"
              variant="contained"
              color="primary"
            >
@@ -96,20 +96,28 @@ function Booking() {
                <TableCell align="center" width="15%">
                  Time End
                </TableCell>
+               <TableCell align="center" width="15%">
+                 
+               </TableCell>
              </TableRow>
            </TableHead>
            <TableBody>
-             {booking.map((user: BookingInterface) => (
-               <TableRow key={user.ID}>
-                 <TableCell align="center">{user.ID}</TableCell>
+             {booking.map((book: BookingInterface) => (
+               <TableRow key={book.ID}>
+                 <TableCell align="center">{book.ID}</TableCell>
                  <TableCell align="left" size="medium">
-                   {user.Member.FirstName}
+                   {book.Member.FirstName}
                  </TableCell>
-                 <TableCell align="left">{user.Member.LastName}</TableCell>
-                 <TableCell align="left">{user.Room.Name}</TableCell>
-                 <TableCell align="left">{user.Usage.Name}</TableCell>
-                 <TableCell align="center">{moment(user.BookingTimeStart).format( 'DD MMMM yyyy HH:mm ')}</TableCell>
-                 <TableCell align="center">{moment(user.BookingTimeStop).format( 'DD MMMM yyyy HH:mm ')}</TableCell>
+                 <TableCell align="left">{book.Member.LastName}</TableCell>
+                 <TableCell align="left">{book.Room.Name}</TableCell>
+                 <TableCell align="left">{book.Usage.Name}</TableCell>
+                 <TableCell align="center">{moment(book.BookingTimeStart).format( 'DD MMMM yyyy HH:mm ')}</TableCell>
+                 <TableCell align="center">{moment(book.BookingTimeStop).format( 'DD MMMM yyyy HH:mm ')}</TableCell>
+                 <TableCell align="center">
+                  <Button variant="contained" color="primary" component={RouterLink} to={"/foodordercreate/" + book.ID}>
+                    สั่งอาหาร
+                  </Button>
+                 </TableCell>
                </TableRow>
              ))}
            </TableBody>

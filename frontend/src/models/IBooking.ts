@@ -17,7 +17,7 @@ export interface BookingInterface {
     MemberID: number;
     Member: UsersInterface;
 
-    FoodOrderedFoodSets: FoodOrderedsInterface[];
+    FoodOrdereds: FoodOrderedsInterface[];
    }
 
    export interface UsageInterface{

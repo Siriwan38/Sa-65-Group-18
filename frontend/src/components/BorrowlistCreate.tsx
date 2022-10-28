@@ -86,6 +86,10 @@ function BorrowListCreate() {
   const getEmployeeLogIn = async () => {
     let res = await GetEmployeeLogIn();
     if (res) {
+      setBorrowList({
+        ...borrowList,
+        ["EmployeeID"]: res?.ID,
+      });
       setEmployeeLogIn(res);
     }
   };
@@ -109,11 +113,7 @@ function BorrowListCreate() {
     getUser();
     getEmployee();
     getEquipment();
-    setBorrowList({
-      ...borrowList,
-      ["EmployeeID"]: employeeLogIn?.ID,
-    });
-  }, [employeeLogIn]);
+  }, []);
 
   const convertType = (data: string | number | undefined) => {
     let val = typeof data === "string" ? parseInt(data) : data;
@@ -157,7 +157,7 @@ function BorrowListCreate() {
       </Snackbar>
 
       <Container maxWidth="md">
-        <Paper>
+        <Paper sx={{ padding: 2 }}>
           <Box
             display={"flex"}
             sx={{
@@ -184,14 +184,14 @@ function BorrowListCreate() {
                 <Select
                   fullWidth
                   disabled
-                  value={localStorage.getItem('uid')}
+                  value={localStorage.getItem('id')}
                   name="EmployeeID"
                   variant="outlined"
                   sx={{bgcolor: "rgba(0, 0, 0, 0.1)"}}
                 >
                 {employee.map((item: EmployeesInterface) => (
                   <option value={item.ID} key={item.ID}>
-                    {item.First_Name}
+                    {item.First_Name} {item.Last_Name}
                   </option>
                 ))}
                 </Select>
@@ -276,7 +276,7 @@ function BorrowListCreate() {
             <Grid item xs={6}>
               <Button
                 component={RouterLink}
-                to="/borrow_list"
+                to="/borrowlist"
                 variant="contained"
                 sx ={{p: 1, m: 2, mx: 'auto'}}
                 color="inherit">
@@ -284,7 +284,7 @@ function BorrowListCreate() {
               </Button>
               <Button 
                 component={RouterLink}
-                to="/borrow_list"
+                to="/borrowlist"
                 variant="contained" 
                 color='success' 
                 sx ={{p: 1, m: 2, mx: 'auto', float: "right"}}

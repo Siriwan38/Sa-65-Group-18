@@ -81,7 +81,7 @@ async function GetEmployeeByUID() {
       },
     };
   
-    let res = await fetch(`${apiUrl}/employee/${localStorage.getItem("uid")}`, requestOptions)
+    let res = await fetch(`${apiUrl}/employee/${localStorage.getItem("id")}`, requestOptions)
       .then((response) => response.json())
       .then((res) => {
         if (res.data) {
@@ -180,7 +180,7 @@ async function GetEmployee() {
     },
   };
 
-  let res = await fetch(`${apiUrl}/employee`, requestOptions)
+  let res = await fetch(`${apiUrl}/employees`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
@@ -202,7 +202,7 @@ async function GetEmployeeLogIn() {
     },
   };
 
-  let res = await fetch(`http://localhost:8080/employee/${localStorage.getItem('uid')}`, requestOptions)
+  let res = await fetch(`http://localhost:8080/employee/${localStorage.getItem('id')}`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
@@ -224,7 +224,7 @@ async function GetUser() {
     },
   };
 
-  let res = await fetch(`${apiUrl}/user`, requestOptions)
+  let res = await fetch(`${apiUrl}/users`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {

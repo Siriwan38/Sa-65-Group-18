@@ -28,11 +28,13 @@ func CreateFoodOrdered(c *gin.Context) {
 	}
 
 	// 10: ค้นหา foodset ด้วย id
+	var newFoodOrderedFoodSet []entity.FoodOrderedFoodSet
 	for _, orderFoodSet := range foodordered.FoodOrderedFoodSets {
-		if tx := entity.DB().Where("id = ?", orderFoodSet.FoodSetID).First(&orderFoodSet); tx.RowsAffected == 0 {
+		if tx := entity.DB().Where("id = ?", orderFoodSet.FoodSetID).First(&orderFoodSet.FoodSet); tx.RowsAffected == 0 {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "food set not found"})
 			return
 		}
+		newFoodOrderedFoodSet = append(newFoodOrderedFoodSet, orderFoodSet)
 	}
 
 	// 11: ค้นหา foodpayment_type ด้วย id
@@ -42,10 +44,10 @@ func CreateFoodOrdered(c *gin.Context) {
 	}
 	// 12: สร้าง FoodOrdered
 	wv := entity.FoodOrdered{
-		Booking:             booking,                         // โยงความสัมพันธ์กับ Entity Booking
-		FoodPaymentType:     foodpayment_type,                // โยงความสัมพันธ์กับ Entity FoodPaymentType
-		FoodTime:            foodordered.FoodTime,            // ตั้งค่าฟิลด์ FoodTime
-		FoodOrderedFoodSets: foodordered.FoodOrderedFoodSets, // โยงความสัมพันธ์กับ Entity FoodSet (แต่ไม่โดยตรง เพราะเป็นคสพแบบหลาย)
+		Booking:             booking,               // โยงความสัมพันธ์กับ Entity Booking
+		FoodPaymentType:     foodpayment_type,      // โยงความสัมพันธ์กับ Entity FoodPaymentType
+		FoodTime:            foodordered.FoodTime,  // ตั้งค่าฟิลด์ FoodTime
+		FoodOrderedFoodSets: newFoodOrderedFoodSet, // โยงความสัมพันธ์กับ Entity FoodSet (แต่ไม่โดยตรง เพราะเป็นคสพแบบหลาย)
 		TotalPrice:          foodordered.TotalPrice,
 	}
 

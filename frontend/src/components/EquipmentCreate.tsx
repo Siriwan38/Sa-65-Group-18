@@ -116,7 +116,7 @@ function EquipmentCreate() {
       EmployeeID: equipment.EmployeeID,
       Time: equipment.Time,
     };
-
+    
     let res = await CreateEquipment(data as EquipmentInterface);
     if (res) {
       setSuccess(true);
@@ -250,7 +250,7 @@ function EquipmentCreate() {
           <Grid item xs={12}>
             <Button
               component={RouterLink}
-              to="/equipment"
+              to="/equipments"
               variant="contained"
               color="inherit"
             >

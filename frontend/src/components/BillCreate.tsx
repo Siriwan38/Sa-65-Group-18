@@ -94,8 +94,8 @@ export default function BillCreate() {
       });
   };
 
-  const getFoodOrdered = async () => {
-    const apiUrl = `http://localhost:8080/food_ordereds`;
+  const getFoodOrdered = async (bookingId: number) => {
+    const apiUrl = `http://localhost:8080/food_ordereds/booking/${bookingId}`;
 
     const requestOptions = {
       method: "GET",
@@ -117,7 +117,7 @@ export default function BillCreate() {
       });
   };
   const getBooking = async () => {
-    const apiUrl = `http://localhost:8080/bookings`;
+    const apiUrl = `http://localhost:8080/bookings/bill`;
 
     const requestOptions = {
       method: "GET",
@@ -133,6 +133,7 @@ export default function BillCreate() {
         console.log(res);
         if (res.data) {
           setBooking(res.data);
+          // setFoodOrdered(res.data.)
         } else {
           console.log(res.error);
         }
@@ -166,7 +167,7 @@ export default function BillCreate() {
     let data = {
       EmployeeID: employee?.ID,
       BookingID: bill.BookingID,
-      FoodOrderedID: booking.find((b) => b.ID === bill.BookingID)?.FoodOrderedFoodSets[0].ID,
+      // FoodOrderedID: booking.find((b) => b.ID === bill.BookingID)?.FoodOrdereds[0].ID,
       PaymentTypeID: bill.PaymentTypeID,
       BillTime: bill.BillTime,
       TotalPrice: bill.TotalPrice,
@@ -204,7 +205,7 @@ export default function BillCreate() {
     let bookingPrice =
       booking.find((b) => b.ID === bill.BookingID)?.Room.Type.Price ?? 0;
     let foodOrderedPrice =
-      booking.find((b) => b.ID === bill.BookingID)?.FoodOrderedFoodSets[0].TotalPrice ?? 0;
+      booking.find((b) => b.ID === bill.BookingID)?.FoodOrdereds[0]?.TotalPrice ?? 0;
       // foodordered.find((f) => f.ID === bill.FoodOrderedID)?.TotalPrice ?? 0;
 
     setBill({ ...bill, TotalPrice: bookingPrice + foodOrderedPrice });
@@ -324,7 +325,7 @@ export default function BillCreate() {
                 </TableHead>
 
                 <TableBody>
-                  {selectedBooking?.FoodOrderedFoodSets[0].FoodOrderedFoodSets.map((foodOrder: FoodOrderedFoodSetsInterface) => (
+                  {selectedBooking?.FoodOrdereds[0] && selectedBooking?.FoodOrdereds[0].FoodOrderedFoodSets.map((foodOrder: FoodOrderedFoodSetsInterface) => (
                     <TableRow key={foodOrder.ID}>
                       <TableCell align="left">{foodOrder.FoodSet.ID}</TableCell>
                       <TableCell align="center">{foodOrder.FoodSet.Name}</TableCell>
