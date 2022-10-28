@@ -15,10 +15,10 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 
 import '../App.css';
-import { BorrowListInterface } from "../models/IBorrowList";
+import { BorrowListInterface } from "../models/IBorrowlist";
 import { EquipmentInterface } from "../models/IEquipment";
-import { EmployeeInterface } from "../models/IEmployee";
-import { UsersInterface } from "../models/IBooking";
+import { EmployeesInterface } from "../models/IUser";
+import { UsersInterface } from "../models/IUser"; 
 
 import {
   GetEmployee,
@@ -36,8 +36,8 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 function BorrowListCreate() {
-  const [employee, setEmployee] = useState<EmployeeInterface[]>([]);
-  const [employeeLogIn, setEmployeeLogIn] = useState<EmployeeInterface>();
+  const [employee, setEmployee] = useState<EmployeesInterface[]>([]);
+  const [employeeLogIn, setEmployeeLogIn] = useState<EmployeesInterface>();
   const [user, setUser] = useState<UsersInterface[]>([]);
   const [equipment, setEquipment] = useState<EquipmentInterface[]>([]);
   const [borrowList, setBorrowList] = useState<Partial<BorrowListInterface>>({
@@ -189,9 +189,9 @@ function BorrowListCreate() {
                   variant="outlined"
                   sx={{bgcolor: "rgba(0, 0, 0, 0.1)"}}
                 >
-                {employee.map((item: EmployeeInterface) => (
+                {employee.map((item: EmployeesInterface) => (
                   <option value={item.ID} key={item.ID}>
-                    {item.FirstName}
+                    {item.First_Name}
                   </option>
                 ))}
                 </Select>

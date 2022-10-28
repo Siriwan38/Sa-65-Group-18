@@ -16,12 +16,29 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-
+import PaymentIcon from '@mui/icons-material/Payment';
+import FastfoodIcon from '@mui/icons-material/Fastfood';
+import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+import CreditScoreIcon from '@mui/icons-material/CreditScore';
+import ConstructionIcon from '@mui/icons-material/Construction';
+import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
+import BedroomChildIcon from '@mui/icons-material/BedroomChild';
 function Navbar() {
  const menu = [
   
-  { name: "รายการจองห้อง", icon: <AssignmentIcon  />, path: "/history" },
-  { name: "บันทึกการจองใช้ห้อง", icon: <MenuBookIcon  />, path: "/create" },
+  { name: "บันทึกรายละเอียดห้อง", icon: <MeetingRoomIcon  />, path: "/roomcreate" },
+  { name: "ข้อมูลห้อง", icon: <AssignmentIcon  />, path: "/room" },
+  { name: "บันทึกการจองใช้ห้อง", icon: <BedroomChildIcon  />, path: "/bookingcreate" },
+  { name: "รายการจองใช้ห้อง", icon: <MenuBookIcon  />, path: "/bookinghistory" },
+  { name: "การสั่งอาหารว่าง", icon: <FastfoodIcon  />, path: "/foodordercreate" },
+  { name: "รายการการสั่งอาหารว่าง", icon: <MenuBookIcon  />, path: "/food" },
+  { name: "บันทึกรายละเอียดอุปกรณ์เสริม", icon: <ConstructionIcon  />, path: "/equipmentscreate" },
+  { name: "ข้อมูลอุปกรณ์เสริม", icon: <MenuBookIcon  />, path: "/equipments" },
+  { name: "ยืมอุปกรณ์", icon: <HomeRepairServiceIcon  />, path: "/borrowlistcreate" },
+  { name: "รายการยืมอุปกรณ์", icon: <MenuBookIcon  />, path: "/borrowlist" },
+  { name: "การชำระเงิน", icon: <PaymentIcon  />, path: "/billcreate" },
+  { name: "ประวัติการชำระเงิน", icon: <CreditScoreIcon  />, path: "/bill" },
+
 ]
 const [openDrawer, setOpenDrawer] = useState(false);
 

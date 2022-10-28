@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { EquipmentInterface } from "../interfaces/Iequipment";
+import { EquipmentInterface } from "../models/IEquipment";
 import { GetEquipment } from "../services/HttpClientService";
 import moment from "moment";
 

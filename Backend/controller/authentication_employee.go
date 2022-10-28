@@ -10,24 +10,24 @@ import (
 )
 
 // POST /login
-func LoginUser(c *gin.Context) {
+func LoginEmployee(c *gin.Context) {
 	var payload LoginPayload
-	var user entity.User
+	var employee entity.Employee
 
 	if err := c.ShouldBindJSON(&payload); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	// ค้นหา user ด้วย email ที่ผู้ใช้กรอกเข้ามา
-	if err := entity.DB().Raw("SELECT * FROM users WHERE email = ?", payload.Email).Scan(&user).Error; err != nil {
+	// ค้นหา employee ด้วย email ที่ผู้ใช้กรอกเข้ามา
+	if err := entity.DB().Raw("SELECT * FROM employees WHERE email = ?", payload.Email).Scan(&employee).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	// ตรวจสอบรหัสผ่าน
-	err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(payload.Password))
+	err := bcrypt.CompareHashAndPassword([]byte(employee.Password), []byte(payload.Password))
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid user credentials"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid employee credentials"})
 		return
 	}
 
@@ -42,7 +42,7 @@ func LoginUser(c *gin.Context) {
 		ExpirationHours: 24,
 	}
 
-	signedToken, err := jwtWrapper.GenerateToken(user.Email)
+	signedToken, err := jwtWrapper.GenerateToken(employee.Email)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "error signing token"})
 		return
@@ -50,11 +50,9 @@ func LoginUser(c *gin.Context) {
 
 	tokenResponse := LoginResponse{
 		Token: signedToken,
-		ID:    user.ID,
-		role:  "user",
+		ID:    employee.ID,
+		role:  "employee",
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": tokenResponse})
 }
-
-// รอเเพิ่ม role เพื่อเช็ค
