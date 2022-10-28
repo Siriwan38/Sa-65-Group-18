@@ -95,7 +95,7 @@ function Food() {
                 <React.Fragment>
                   <TableRow key={foodOrderItem.ID}>
                     <TableCell align="left">{foodOrderItem.ID}</TableCell>
-                    {/* <TableCell align="left">{foodOrderItem.Booking.Usage}</TableCell>           */}
+                    <TableCell align="left">{foodOrderItem.Booking.Usage}</TableCell>          
                     <TableCell align="center">{foodOrderItem.FoodPaymentType.Name}</TableCell>
                     <TableCell align="center">{foodOrderItem.TotalPrice}</TableCell>
                     <TableCell align="center">

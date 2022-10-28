@@ -37,7 +37,7 @@ function SignIn() {
           setSuccess(true);
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("id", res.data.id);
-          localStorage.setItem("user", res.data.role);
+          localStorage.setItem("role", "user");
           window.location.reload()
         } else {
           setError(true);

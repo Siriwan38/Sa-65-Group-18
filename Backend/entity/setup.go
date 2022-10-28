@@ -75,9 +75,19 @@ func SetupDatabase() {
 	gender3 := Gender{GenderName: "Other"}
 	db.Model(&Gender{}).Create(&gender3)
 
+	//User ------------------------------
+	password1, err := bcrypt.GenerateFromPassword([]byte("123456"), 14)
+
+	user1 := User{
+		FirstName: "Suphawut",
+		LastName:  "Thueanklang",
+		Email:     "ADD@gmail.com",
+		Password:  string(password1),
+	}
+	db.Model(&User{}).Create(&user1)
+
 	// Employee --------------------------------------------------------------------------------------------------------
 
-	password1, err := bcrypt.GenerateFromPassword([]byte("123456"), 14)
 	employee1 := Employee{
 		First_Name: "Apiwat",
 		Last_Name:  "Chaemcharoen",
