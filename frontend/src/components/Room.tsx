@@ -60,7 +60,7 @@ function Rooms() {
           <Box>
             <Button
               component={RouterLink}
-              to="/create"
+              to="/roomcreate"
               variant="contained"
               color="primary"
             >
