@@ -19,6 +19,9 @@ import RoomCreate from "./components/RoomCreate";
 
 import Bill from "./components/BookingHistory";
 import BillCreate from "./components/BillCreate";
+
+import Sign_Home from "./components/signin_home";
+
 export default function App() {
 
   const [token, setToken] = React.useState<String>("");
@@ -31,6 +34,7 @@ export default function App() {
   }, []);
 
   if (!token) {
+
     return <SignIn />;
   }
   

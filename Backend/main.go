@@ -102,6 +102,7 @@ func main() {
 
 	// Authentication Routes
 	r.POST("/login/user", controller.LoginUser)
+	r.POST("/login/employee", controller.LoginEmployee)
 
 	// Run the server
 	r.Run()
