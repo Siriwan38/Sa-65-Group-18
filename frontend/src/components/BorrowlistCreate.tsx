@@ -132,6 +132,7 @@ function BorrowListCreate() {
     let res = await BorrowLists(data);
     if (res) {
       setSuccess(true);
+      window.location.href="/borrowlist";
     } else {
       setError(true);
     }
@@ -191,7 +192,7 @@ function BorrowListCreate() {
                 >
                 {employee.map((item: EmployeesInterface) => (
                   <option value={item.ID} key={item.ID}>
-                    {item.First_Name} {item.Last_Name}
+                    {item.First_Name}
                   </option>
                 ))}
                 </Select>
@@ -283,8 +284,6 @@ function BorrowListCreate() {
                   Back
               </Button>
               <Button 
-                component={RouterLink}
-                to="/borrowlist"
                 variant="contained" 
                 color='success' 
                 sx ={{p: 1, m: 2, mx: 'auto', float: "right"}}
