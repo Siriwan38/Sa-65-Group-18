@@ -192,7 +192,7 @@ function BorrowListCreate() {
                 >
                 {employee.map((item: EmployeesInterface) => (
                   <option value={item.ID} key={item.ID}>
-                    {item.First_Name} {item.Last_Name}
+                    {item.First_Name}
                   </option>
                 ))}
                 </Select>
