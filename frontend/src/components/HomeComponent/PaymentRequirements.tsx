@@ -19,6 +19,7 @@ function PaymentRequirements() {
         <b>เพื่อ</b>	 ให้สมาชิกระบบจองใช้ห้องสามารถชำระเงินที่ใช้บริการห้องได้<br />
         </p>
       </Container>
+
     </div>
   );
 }
