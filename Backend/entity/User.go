@@ -24,7 +24,7 @@ type User struct {
 	BirthDay       time.Time
 	Identification string `gorm:"uniqueIndex"`
 	Email          string `gorm:"uniqueIndex"`
-	Password       string
+	Password       string `json:"-"`
 
 	GenderID *uint
 	Gender   Gender `gorm:"references:ID"`

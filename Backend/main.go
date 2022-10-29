@@ -76,6 +76,7 @@ func main() {
 
 			//FoodOrdered
 			protected.GET("/foodordereds", controller_foodorder.ListFoodOrdereds)
+			protected.GET("/foodordereds/booking/:id", controller_foodorder.ListFoodOrderedsByBooking)
 			protected.GET("/foodordered/:id", controller_foodorder.GetFoodOrdered)
 			protected.POST("/foodordereds", controller_foodorder.CreateFoodOrdered)
 

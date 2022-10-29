@@ -77,6 +77,25 @@ func ListFoodOrdereds(c *gin.Context) {
 
 }
 
+// GET /foodordereds/booking/:id
+func ListFoodOrderedsByBooking(c *gin.Context) {
+	var foodOrdered []entity.FoodOrdered
+	id := c.Param("id")
+
+	/*เงื่อนไขสำหรับการค้นหา โดยดึงข้อมูลจากตารางรองที่เกี่ยวข้องมา #ระวัง ชื่อ field ต้องตรงกัน
+	ซึ่งดูฟิลด์ได้จากเราสร้างไว้ให้ entity หลัก ในไฟล์ schema */
+
+	if err := entity.DB().Raw("SELECT * FROM food_ordereds WHERE booking_id = ?", id).
+		Preload("Booking").Preload("Booking.Room").Preload("Booking.Room.Type").Preload("FoodPaymentType").
+		Preload("FoodOrderedFoodSets").Preload("FoodOrderedFoodSets.FoodSet"). //preload แบบ join table
+		Find(&foodOrdered).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"data": foodOrdered})
+
+}
+
 // GET /foodordered/:id
 func GetFoodOrdered(c *gin.Context) {
 	var foodOrdered entity.FoodOrdered //GET จะ​ get มาแค่ก้อนเดียวเลยไม่ใช้ array (เก็ทไอดีของตัวที่เคยบันทึก) [ex. เก็ทเอาไปคิดราคา(ของระบบอื่น)]

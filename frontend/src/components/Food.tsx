@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useParams } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
@@ -15,10 +15,12 @@ import moment from "moment";
 import { FoodOrderedsInterface, FoodOrderedFoodSetsInterface} from "../models/IFoodorder";
 
 function Food() {
+  // ดึง bookingId มาจาก url ตอนกดสั่งอาหาร ex. "localhost:3000/foodordercreate/2" จะได้ bookingId = 2
+  const { bookingId } = useParams();
   const [foodOrdereds, setFoodOrdereds] = React.useState<FoodOrderedsInterface[]>([]);
 
   const getfood = async () => {
-    const apiUrl = `http://localhost:8080/foodordereds`;
+    const apiUrl = `http://localhost:8080/foodordereds/booking/${bookingId}`;
     const requestOptions = {
       method: "GET",
       headers: {
@@ -60,7 +62,16 @@ function Food() {
           <Box>
             <Button
               component={RouterLink}
-              to="/create"
+              to="/bookinghistory"
+              variant="contained"
+              color="inherit"
+            >
+              กลับ
+            </Button>
+            &nbsp;
+            <Button
+              component={RouterLink}
+              to={"/foodordercreate/" + bookingId}
               variant="contained"
               color="primary"
             >

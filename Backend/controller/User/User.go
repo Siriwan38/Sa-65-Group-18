@@ -1,13 +1,34 @@
 package controller
 
 import (
-	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/Siriwan38/Sa-65-Group-18/entity"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 )
+
+type UserPayload struct {
+	NamePrefixID *uint
+
+	FirstName string
+	LastName  string
+
+	BirthDay       time.Time
+	Identification string
+	Email          string
+	Password       string
+
+	GenderID *uint
+
+	Mobile  string
+	Address string
+
+	ProvinceID *uint
+
+	EmployeeID *uint
+}
 
 // GET /user/:id
 // ส่งข้อมูลทั้งตัวหลักและตัวย่อยไปที่หน้าบ้านด้วย id ที่ระบุมา
@@ -26,39 +47,9 @@ func GetUser(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": user})
 }
 
-// DELETE /users/:id
-// func DeleteUser(c *gin.Context) {
-// 	id := c.Param("id")
-// 	if tx := entity.DB().Exec("DELETE FROM users WHERE id = ?", id); tx.RowsAffected == 0 {
-// 		c.JSON(http.StatusBadRequest, gin.H{"error": "user not found"})
-// 		return
-// 	}
-// 	c.JSON(http.StatusOK, gin.H{"data": id})
-// }
-
-// PATCH /users
-// func UpdateUser(c *gin.Context) {
-// 	var user entity.User
-// 	if err := c.ShouldBindJSON(&user); err != nil {
-// 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-// 		return
-// 	}
-
-// 	if tx := entity.DB().Where("id = ?", user.ID).First(&user); tx.RowsAffected == 0 {
-// 		c.JSON(http.StatusBadRequest, gin.H{"error": "user not found"})
-// 		return
-// 	}
-
-// 	if err := entity.DB().Save(&user).Error; err != nil {
-// 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-// 		return
-// 	}
-// 	c.JSON(http.StatusOK, gin.H{"data": user})
-// }
-
 // POST /users
 func CreateUser(c *gin.Context) {
-	var user entity.User
+	var user UserPayload
 	var gender entity.Gender
 	var nameprefix entity.NamePrefix
 	var province entity.Province
@@ -68,7 +59,6 @@ func CreateUser(c *gin.Context) {
 	if err := c.ShouldBindJSON(&user); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	}
-	fmt.Printf("%v", user)
 
 	// 8: ค้นหา nameprefix ด้วย id
 	if tx := entity.DB().Table("name_prefixes").Where("id = ?", user.NamePrefixID).First(&nameprefix); tx.RowsAffected == 0 {

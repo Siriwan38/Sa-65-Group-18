@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { Link as RouterLink, useParams } from "react-router-dom";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import FormControl from '@mui/material/FormControl';
@@ -8,7 +8,7 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -265,7 +265,7 @@ export default function FoodOrderedCreate() {
             <TextField
               disabled
               id="Room"
-              value={booking?.Room?.Name}
+              value={`Booking ${booking?.ID} - ${booking?.Room?.Name}`}
             />
           </Grid>
           <Grid item xs={4}>
@@ -360,6 +360,7 @@ export default function FoodOrderedCreate() {
             </FormControl>
           </Grid>
           <Grid item xs={12}>
+            <Button variant="contained" color="inherit" component={RouterLink} to="/bookinghistory">กลับ</Button>
             <Button variant="contained" sx={{ float: "right" }} onClick={submit}>บันทึกการสั่งอาหารว่าง</Button>
           </Grid>
         </Grid>

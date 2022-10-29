@@ -49,7 +49,7 @@ export default function App() {
          <Route path="/equipments" element={<Equipments />} />
          <Route path="/equipmentscreate" element={<EquipmentCreate />} />
 
-         <Route path="/food" element={<Food />} />
+         <Route path="/foodorder/:bookingId" element={<Food />} />
          <Route path="/foodordercreate/:bookingId" element={<FoodorderCreate />} />
 
          <Route path="/room" element={<Room />} />

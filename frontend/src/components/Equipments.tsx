@@ -82,7 +82,7 @@ function Equipments() {
           <Box>
             <Button
               component={RouterLink}
-              to="/equipment/create"
+              to="/equipmentscreate"
               variant="contained"
               color="primary"
             >

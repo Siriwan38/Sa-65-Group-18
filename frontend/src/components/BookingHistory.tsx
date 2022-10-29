@@ -97,7 +97,10 @@ function Booking() {
                  Time End
                </TableCell>
                <TableCell align="center" width="15%">
-                 
+                {/* For FoodOrderCreate Button */}
+               </TableCell>
+               <TableCell align="center" width="15%">
+                {/* For FoodOrder Button */}
                </TableCell>
              </TableRow>
            </TableHead>
@@ -116,6 +119,11 @@ function Booking() {
                  <TableCell align="center">
                   <Button variant="contained" color="primary" component={RouterLink} to={"/foodordercreate/" + book.ID}>
                     สั่งอาหาร
+                  </Button>
+                 </TableCell>
+                 <TableCell align="center">
+                  <Button variant="contained" color="primary" component={RouterLink} to={"/foodorder/" + book.ID}>
+                    รายการสั่งอาหาร
                   </Button>
                  </TableCell>
                </TableRow>

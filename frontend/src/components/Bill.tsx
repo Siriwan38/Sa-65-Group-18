@@ -61,7 +61,7 @@ function Bills() {
           <Box>
             <Button
               component={RouterLink}
-              to="/create"
+              to="/billcreate"
               variant="contained"
               color="primary"
             >
@@ -104,10 +104,10 @@ function Bills() {
                   <TableCell align="left">{bill.ID}</TableCell>
                   <TableCell align="left">{bill.Employee.First_Name}</TableCell>
                   <TableCell align="center">{bill.PaymentType.Name}</TableCell>
-                  <TableCell align="center">{bill.Booking.Room.Type.Price}</TableCell>
-                  <TableCell align="center">{bill.Booking.FoodOrdereds[0]?.TotalPrice ?? 0}</TableCell>
+                  <TableCell align="center">{bill.Booking.Room.Name} - {bill.Booking.Room.Type.Price} ฿</TableCell>
+                  <TableCell align="center">{bill.Booking.FoodOrdereds.map(({ TotalPrice }) => TotalPrice).reduce((sum, i) => Number(sum) + Number(i), 0) || 0} ฿</TableCell>
                   <TableCell align="center">
-                    {bill.TotalPrice}
+                    {bill.TotalPrice} ฿
                   </TableCell>
                   <TableCell align="center">
                     {moment(bill.BillTime).format("DD/MM/YYYY HH:mm")}

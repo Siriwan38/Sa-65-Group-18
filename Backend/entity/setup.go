@@ -341,6 +341,7 @@ func SetupDatabase() {
 		Mobile:         "0863321475",
 		Address:        "123",
 		Province:       province21,
+		Employee:       employee1,
 	}
 	db.Model(&User{}).Create(&user1)
 

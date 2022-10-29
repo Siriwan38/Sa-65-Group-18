@@ -8,10 +8,11 @@ import Typography from "@mui/material/Typography";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Container from "@mui/material/Container";
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
 
 import { SigninInterface } from "../models/ISignin";
 
@@ -22,49 +23,17 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-function TabPanel(props : any) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index : any) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-
 function SignIn() {
-  
+
   const [signin, setSignin] = useState<Partial<SigninInterface>>({});
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState("0");
 
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
     setValue(newValue);
+    setSignin({});
   }
 
   const loginuser = () => {
@@ -157,103 +126,98 @@ function SignIn() {
           Sign in
 
         </Typography>
-        
+
         <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="User" {...a11yProps(0)} />
-          <Tab label="Employee" {...a11yProps(1)} />
-        </Tabs>
-      </Box>
-      <TabPanel value={value} index={0}>
-        
-        <form style={{ width: "100%", marginTop: 1 }} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="Email"
-            label="Email Address"
-            name="Email"
-            autoComplete="email"
-            autoFocus
-            value={signin.Email || ""}
-            onChange={handleInputChange}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="Password"
-            label="Password"
-            type="password"
-            id="Password"
-            autoComplete="current-password"
-            value={signin.Password || ""}
-            onChange={handleInputChange}
-          />
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            sx={{ marginTop: 3, marginBottom: 0 }}
-            onClick={loginuser}
-          >
-            Sign In
-          </Button>
-        </form>
-      </TabPanel>
+          <TabContext value={value}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+              <TabList onChange={handleChange} aria-label="lab API tabs example">
+                <Tab label="User" value="0" />
+                <Tab label="Employee" value="1" />
+              </TabList>
+            </Box>
 
-      <TabPanel value={value} index={1}>
-      *username:KokAC19@gmail.com, password:123456*
-        <form style={{ width: "100%", marginTop: 1 }} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="Email"
-            label="Email Address"
-            name="Email"
-            autoComplete="email"
-            autoFocus
-            value={signin.Email || ""}
-            onChange={handleInputChange}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="Password"
-            label="Password"
-            type="password"
-            id="Password"
-            autoComplete="current-password"
-            value={signin.Password || ""}
-            onChange={handleInputChange}
-          />
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            sx={{ marginTop: 3, marginBottom: 0 }}
-            onClick={loginemployee}
-          >
-            Sign In
-          </Button>
-        </form>
+            <TabPanel value="0">
+              <form style={{ width: "100%", marginTop: 1 }} noValidate>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="Email"
+                  label="Email Address"
+                  name="Email"
+                  autoComplete="email"
+                  autoFocus
+                  value={signin.Email || ""}
+                  onChange={handleInputChange}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="Password"
+                  label="Password"
+                  type="password"
+                  id="Password"
+                  autoComplete="current-password"
+                  value={signin.Password || ""}
+                  onChange={handleInputChange}
+                />
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  sx={{ marginTop: 3, marginBottom: 0 }}
+                  onClick={loginuser}
+                >
+                  Sign In
+                </Button>
+              </form>
+            </TabPanel>
 
-        </TabPanel>
-     
-      </Box>
-
-        
-
-
-    
+            <TabPanel value="1">
+              *username:KokAC19@gmail.com, password:123456*
+              <form style={{ width: "100%", marginTop: 1 }} noValidate>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="Email"
+                  label="Email Address"
+                  name="Email"
+                  autoComplete="email"
+                  autoFocus
+                  value={signin.Email || ""}
+                  onChange={handleInputChange}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="Password"
+                  label="Password"
+                  type="password"
+                  id="Password"
+                  autoComplete="current-password"
+                  value={signin.Password || ""}
+                  onChange={handleInputChange}
+                />
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  sx={{ marginTop: 3, marginBottom: 0 }}
+                  onClick={loginemployee}
+                >
+                  Sign In
+                </Button>
+              </form>
+            </TabPanel>
+          </TabContext>
+        </Box>
       </div>
     </Container>
   );

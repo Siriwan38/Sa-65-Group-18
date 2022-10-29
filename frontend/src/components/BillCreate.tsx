@@ -26,6 +26,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import Button from "@mui/material/Button";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import moment from "moment";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -204,8 +205,8 @@ export default function BillCreate() {
   const sumTotalPrice = () => {
     let bookingPrice =
       booking.find((b) => b.ID === bill.BookingID)?.Room.Type.Price ?? 0;
-    let foodOrderedPrice =
-      booking.find((b) => b.ID === bill.BookingID)?.FoodOrdereds[0]?.TotalPrice ?? 0;
+    let foodOrderedPrice = booking.find((b) => b.ID === bill.BookingID)?.FoodOrdereds.map(({ TotalPrice }) => TotalPrice).reduce((sum, i) => Number(sum) + Number(i), 0) || 0
+      // booking.find((b) => b.ID === bill.BookingID)?.FoodOrdereds[0]?.TotalPrice ?? 0;
       // foodordered.find((f) => f.ID === bill.FoodOrderedID)?.TotalPrice ?? 0;
 
     setBill({ ...bill, TotalPrice: bookingPrice + foodOrderedPrice });
@@ -273,34 +274,40 @@ export default function BillCreate() {
             <p>พนักงานระบบ</p>
           </Grid>
           <Grid item xs={6}>
-            <TextField disabled id="Name" value={employee?.First_Name} />
+            <TextField disabled id="Name" value={employee?.First_Name} fullWidth />
           </Grid>
+          <Grid item xs={2}></Grid>
 
           <Grid item xs={4}>
             <p>ห้องที่ต้องการชำระเงิน</p>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={6}>
             <Select
               id="BookingID"
               value={bill.BookingID}
               inputProps={{
                 name: "BookingID",
               }}
+              fullWidth
               onChange={handleSelectChange}
             >
               {booking.map((item: BookingInterface) => (
                 <MenuItem key={item.ID} value={item.ID}>
-                  {item.Room.Name}
+                  Booking {item.ID} - {item.Room.Name} ({item.Room.Type.Price ?? 0} ฿)
                 </MenuItem>
               ))}
             </Select>
           </Grid>
+          <Grid item xs={2}></Grid>
+
           <Grid item xs={4}>
             <p>ชื่อผู้ใช้งาน</p>
           </Grid>
-          <Grid item xs={8}>
-            <TextField disabled id="Name" value={selectedBooking?.Member.FirstName} />
+          <Grid item xs={6}>
+            <TextField disabled id="Name" value={selectedBooking?.Member.FirstName} fullWidth />
           </Grid>
+          <Grid item xs={2}></Grid>
+
           <Grid item xs={4}>
             <p>รายการสั่งอาหาร</p>
           </Grid>
@@ -313,10 +320,7 @@ export default function BillCreate() {
                       ID
                     </TableCell>
                     <TableCell align="center" width="20%">
-                      Food Set Name
-                    </TableCell>
-                    <TableCell align="center" width="20%">
-                      Quantity
+                      Food Order Time
                     </TableCell>
                     <TableCell align="center" width="20%">
                       Total Price
@@ -325,17 +329,11 @@ export default function BillCreate() {
                 </TableHead>
 
                 <TableBody>
-                  {selectedBooking?.FoodOrdereds[0] && selectedBooking?.FoodOrdereds[0].FoodOrderedFoodSets.map((foodOrder: FoodOrderedFoodSetsInterface) => (
+                  {selectedBooking?.FoodOrdereds.map((foodOrder: FoodOrderedsInterface) => (
                     <TableRow key={foodOrder.ID}>
-                      <TableCell align="left">{foodOrder.FoodSet.ID}</TableCell>
-                      <TableCell align="center">{foodOrder.FoodSet.Name}</TableCell>
-                      <TableCell align="center">{foodOrder.Quantity}</TableCell>
-                      <TableCell align="center">{foodOrder.Quantity * foodOrder.FoodSet.Price}</TableCell>
-                      {/* 
+                      <TableCell align="left">{foodOrder.ID}</TableCell>
+                      <TableCell align="center">{moment(foodOrder.FoodTime).format("DD MMMM YYYY")}</TableCell>
                       <TableCell align="center">{foodOrder.TotalPrice}</TableCell>
-                      <TableCell align="center">
-                        {moment(foodOrder.FoodTime).format("DD/MM/YYYY HH:mm")}
-                      </TableCell> */}
                     </TableRow>
                   ))}
                 </TableBody>
@@ -345,7 +343,7 @@ export default function BillCreate() {
           <Grid item xs={4}>
             <p>วิธีการชำระเงิน</p>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={6}>
             <Select
               id="PaymentTypeID"
               value={bill.PaymentTypeID}
@@ -353,6 +351,7 @@ export default function BillCreate() {
                 name: "PaymentTypeID",
               }}
               onChange={handleSelectChange}
+              fullWidth
             >
               {paymentTypes.map((item: PaymentsInterface) => (
                 <MenuItem key={item.ID} value={item.ID}>
@@ -361,16 +360,20 @@ export default function BillCreate() {
               ))}
             </Select>
           </Grid>
+          <Grid item xs={2}></Grid>
+
           <Grid item xs={4}>
             <p>ราคารวม</p>
           </Grid>
-          <Grid item xs={8}>
-            <TextField disabled id="TotalPrice" value={bill?.TotalPrice} />
+          <Grid item xs={6}>
+            <TextField disabled id="TotalPrice" value={bill?.TotalPrice} fullWidth/>
           </Grid>
+          <Grid item xs={2}></Grid>
+
           <Grid item xs={4}>
             <p>วันที่และเวลา</p>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={6}>
             <FormControl fullWidth variant="outlined">
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DatePicker
@@ -387,6 +390,8 @@ export default function BillCreate() {
               </LocalizationProvider>
             </FormControl>
           </Grid>
+          <Grid item xs={2}></Grid>
+
           <Grid item xs={12}>
             <Button variant="contained" color="primary" onClick={submit}>
               ยืนยันการชำระเงิน

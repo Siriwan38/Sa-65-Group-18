@@ -48,8 +48,8 @@ export default function Navbar() {
 
     { name: "บันทึกการจองใช้ห้อง", icon: <BedroomChildIcon />, path: "/bookingcreate" },
     { name: "รายการจองใช้ห้อง", icon: <MenuBookIcon />, path: "/bookinghistory" },
-    { name: "การสั่งอาหารว่าง", icon: <FastfoodIcon />, path: "/foodordercreate" },
-    { name: "รายการการสั่งอาหารว่าง", icon: <MenuBookIcon />, path: "/food" },
+    // { name: "การสั่งอาหารว่าง", icon: <FastfoodIcon />, path: "/foodordercreate" },
+    // { name: "รายการการสั่งอาหารว่าง", icon: <MenuBookIcon />, path: "/food" },
 
   ]
   const [openDrawer, setOpenDrawer] = useState(false);

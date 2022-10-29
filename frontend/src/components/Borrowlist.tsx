@@ -69,7 +69,7 @@ function BorrowList() {
           <Box>
             <Button
               component={RouterLink}
-              to="/borrow_list/create"
+              to="/borrowlistcreate"
               variant="contained"
               color="primary"
             >
