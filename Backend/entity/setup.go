@@ -75,19 +75,8 @@ func SetupDatabase() {
 	gender3 := Gender{GenderName: "Other"}
 	db.Model(&Gender{}).Create(&gender3)
 
-	//User ------------------------------
-	password1, err := bcrypt.GenerateFromPassword([]byte("123456"), 14)
-
-	user1 := User{
-		FirstName: "Suphawut",
-		LastName:  "Thueanklang",
-		Email:     "ADD@gmail.com",
-		Password:  string(password1),
-	}
-	db.Model(&User{}).Create(&user1)
-
 	// Employee --------------------------------------------------------------------------------------------------------
-
+	password1, err := bcrypt.GenerateFromPassword([]byte("123456"), 14)
 	employee1 := Employee{
 		First_Name: "Apiwat",
 		Last_Name:  "Chaemcharoen",
@@ -337,6 +326,23 @@ func SetupDatabase() {
 
 	province77 := Province{ProvinceName: "Yasothon"}
 	db.Model(&Province{}).Create(&province77)
+
+	//User ------------------------------
+	password3, err := bcrypt.GenerateFromPassword([]byte("123456"), 14)
+
+	user1 := User{
+		FirstName:      "Suphawut",
+		LastName:       "Thueanklang",
+		NamePrefix:     prefix2,
+		Identification: "1532233354543",
+		Email:          "ADD@gmail.com",
+		Password:       string(password3),
+		Gender:         gender1,
+		Mobile:         "0863321475",
+		Address:        "123",
+		Province:       province21,
+	}
+	db.Model(&User{}).Create(&user1)
 
 	//Room ------------------------------
 	// setup type

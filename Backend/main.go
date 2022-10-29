@@ -52,6 +52,7 @@ func main() {
 			protected.POST("/createbooking", controller_booking.CreateBooking)
 			protected.GET("/booking", controller_booking.ListBooking)
 			protected.GET("/booking/:id", controller_booking.GetBooking)
+			protected.GET("/booking/member/:id", controller_booking.GetBookingByMember)
 			protected.GET("/usage", controller_booking.ListUsage)
 			protected.GET("/bookings/bill", controller_booking.ListBookingforBill)
 			protected.GET("/bookings/bill/:id", controller_booking.GetBookingforBill)

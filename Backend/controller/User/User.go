@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/Siriwan38/Sa-65-Group-18/entity"
@@ -67,6 +68,7 @@ func CreateUser(c *gin.Context) {
 	if err := c.ShouldBindJSON(&user); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	}
+	fmt.Printf("%v", user)
 
 	// 8: ค้นหา nameprefix ด้วย id
 	if tx := entity.DB().Table("name_prefixes").Where("id = ?", user.NamePrefixID).First(&nameprefix); tx.RowsAffected == 0 {

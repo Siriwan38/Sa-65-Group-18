@@ -21,7 +21,7 @@ function Booking() {
  const [booking, setBooking] = React.useState<BookingInterface[]>([]);
  
  const getBooking = async () => {
-   const apiUrl = "http://localhost:8080/booking";
+   const apiUrl = `http://localhost:8080/booking/member/${localStorage.getItem("id")}`;
    const requestOptions = {
      method: "GET",
      headers: {

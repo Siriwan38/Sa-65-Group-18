@@ -42,7 +42,6 @@ function Users() {
    { field: "FirstName", headerName: "First name", width: 96 },
    { field: "LastName", headerName: "Last name", width: 96 },
    { field: "Email", headerName: "Email", width: 96 },
-   { field: "Password", headerName: "Password", width: 96 },
    { field: "Address", headerName: "Address", width: 96 },
    { field: "BirthDay", headerName: "BirthDay", width: 96 },
    { field: "Gender ID", headerName: "Gender", width: 96, valueGetter: (params) => { return params.row.Gender.GenderName } },
@@ -80,16 +79,6 @@ function Users() {
            >
              Users
            </Typography>
-         </Box>
-         <Box>
-           <Button
-              variant="outlined"
-              color="error"
-              onClick={logOut}
-              sx={{ marginX: 1 }}
-          >
-            Log out
-          </Button>
          </Box>
        </Box>
        <div style={{ height: 400, width: "100%", marginTop: '20px'}}>

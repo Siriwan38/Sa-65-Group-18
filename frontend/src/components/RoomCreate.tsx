@@ -49,7 +49,7 @@ function RoomCreate() {
     const { value } = event.target;
     setRoom({ ...room, [id]: value });
 
-  };
+  }; //การรับข้อมูลที่กรอก
   const handleChange = (
     event: React.ChangeEvent<{ name?: string; value: unknown }>
   ) => {
@@ -58,7 +58,7 @@ function RoomCreate() {
       ...room,
       [name]: event.target.value,
     });
-  };
+  }; //การรับข้อมูลที่กรอก (ใช้กับคอมโบบ็อก)
 
   const getEmployee = async () => {
     const apiUrl = `http://localhost:8080/employee/${localStorage.getItem("id")}`;
@@ -211,7 +211,7 @@ function RoomCreate() {
     getBuilding();
     getServiceDay();
     getPeriod();
-  }, []);
+  }, []); 
 
   console.log(room)
 
@@ -256,7 +256,7 @@ function RoomCreate() {
             <p>First Name</p>
             <FormControl fullWidth variant="outlined">
               <TextField
-                id="Employee"
+                id="First_Name" //ระบุว่าต้องบันทึกที่ไหน
                 disabled
                 variant="outlined"
                 type="string"
@@ -271,7 +271,7 @@ function RoomCreate() {
             <p>Last Name</p>
             <FormControl fullWidth variant="outlined">
               <TextField
-                id="Employee"
+                id="Last_Name"
                 disabled
                 variant="outlined"
                 type="string"
@@ -319,12 +319,12 @@ function RoomCreate() {
                 label="Select"
                 value={room.TypeID}
                 onChange={handleChange}
-                inputProps={{ name: "TypeID" }}
+                inputProps={{ name: "TypeID" }} //หาออบเจคที่ตรงกับTypeID
               >
-                {type.map((item: TypeInterface) => (
+                {type.map((item: TypeInterface) => ( //map วนลูป type 
                   <MenuItem key={item.Name} value={item.ID}>
-                    {item.Name}
-                  </MenuItem>
+                    {item.Name}  
+                  </MenuItem> //{item.Name} ตัวที่ต้องการแสดง
                 ))}
               </TextField>
             </FormControl>

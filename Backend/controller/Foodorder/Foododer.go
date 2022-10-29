@@ -67,7 +67,7 @@ func ListFoodOrdereds(c *gin.Context) {
 	ซึ่งดูฟิลด์ได้จากเราสร้างไว้ให้ entity หลัก ในไฟล์ schema */
 
 	if err := entity.DB().Raw("SELECT * FROM food_ordereds").
-		Preload("Booking").Preload("FoodPaymentType").
+		Preload("Booking").Preload("Booking.Room").Preload("Booking.Room.Type").Preload("FoodPaymentType").
 		Preload("FoodOrderedFoodSets").Preload("FoodOrderedFoodSets.FoodSet"). //preload แบบ join table
 		Find(&foodOrdered).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -83,7 +83,7 @@ func GetFoodOrdered(c *gin.Context) {
 
 	id := c.Param("id")
 	if err := entity.DB().Raw("SELECT * FROM food_ordereds WHERE id = ?", id).
-		Preload("Booking").Preload("FoodPaymentType").
+		Preload("Booking").Preload("Booking.Room").Preload("Booking.Room.Type").Preload("FoodPaymentType").
 		Preload("FoodOrderedFoodSets").Preload("FoodOrderedFoodSets.FoodSet").
 		Find(&foodOrdered).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

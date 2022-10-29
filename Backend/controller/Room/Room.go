@@ -8,7 +8,6 @@ import (
 )
 
 func CreateRoom(c *gin.Context) {
-
 	var room entity.Room
 	var employee entity.Employee
 	var ttype entity.Type

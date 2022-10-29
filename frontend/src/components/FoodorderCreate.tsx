@@ -37,19 +37,19 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 export default function FoodOrderedCreate() {
+  // ดึง bookingId มาจาก url ตอนกดสั่งอาหาร ex. "localhost:3000/foodordercreate/2" จะได้ bookingId = 2
+  const { bookingId } = useParams();
+
   const [booking, setBooking] = React.useState<BookingInterface>();
   const [foodPaymenyTypes, setFoodPaymentTypes] = React.useState<FoodPaymentTypesInterface[]>([]);
   const [foodSets, setFoodSets] = React.useState<FoodSetsInterface[]>([]);
   const [selectedFoodSet, setSelectedFoodSet] = React.useState<FoodSetsInterface | null>();
-  const [selectedBooking, setSelectedBooking] = React.useState<BookingInterface[]>([]);
   const [foodOrdered, setFoodOrdered] = React.useState<Partial<FoodOrderedsInterface>>({
-    BookingID: 1, FoodPaymentTypeID: 0, FoodOrderedFoodSets: [], FoodTime: new Date(),  TotalPrice: 0          // แก้ตอนรวม
+    BookingID: Number(bookingId), FoodPaymentTypeID: 0, FoodOrderedFoodSets: [], FoodTime: new Date(),  TotalPrice: 0          // แก้ตอนรวม
   });
 
   const [success, setSuccess] = React.useState(false);
   const [error, setError] = React.useState(false);
-
-  const { bookingId } = useParams();
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
@@ -218,11 +218,6 @@ export default function FoodOrderedCreate() {
     setFoodOrdered({ ...foodOrdered, FoodOrderedFoodSets: newFoodOrderedFoodSets, TotalPrice: newTotalPrice });
   }
 
-  const handleSelectChange = (event: SelectChangeEvent<number>) => {
-    const name = event.target.name;
-    setFoodOrdered({...foodOrdered, [name]: event.target.value});
-  }
-
   useEffect(() => {
     getBookings();
     getFoodSets();
@@ -230,9 +225,7 @@ export default function FoodOrderedCreate() {
     
   }, []);
 
-  
   console.log(selectedFoodSet);
-
 
   return (
     <Container maxWidth="md">

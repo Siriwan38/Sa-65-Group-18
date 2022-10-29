@@ -31,6 +31,8 @@ export default function Navbar() {
 
   const menu_employee = [
 
+    { name: "บันทึกข้อมูลผู้ใช้บริการ", icon: <MeetingRoomIcon />, path: "/usercreate" },
+    { name: "ข้อมูลผู้ใช้บริการ", icon: <AssignmentIcon />, path: "/user" },
     { name: "บันทึกรายละเอียดห้อง", icon: <MeetingRoomIcon />, path: "/roomcreate" },
     { name: "ข้อมูลห้อง", icon: <AssignmentIcon />, path: "/room" },
     { name: "บันทึกรายละเอียดอุปกรณ์เสริม", icon: <ConstructionIcon />, path: "/equipmentscreate" },

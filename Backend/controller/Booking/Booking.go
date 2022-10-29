@@ -63,7 +63,6 @@ func ListBooking(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-
 	c.JSON(http.StatusOK, gin.H{"data": Booking})
 }
 
@@ -72,6 +71,18 @@ func GetBooking(c *gin.Context) {
 	id := c.Param("id")
 	var Booking entity.Booking
 	if err := entity.DB().Raw("SELECT * FROM bookings WHERE id = ?", id).Preload("Room").Preload("Room.Type").Preload("Usage").Preload("Member").Find(&Booking).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": Booking})
+}
+
+// GET: /booking/member/:id
+func GetBookingByMember(c *gin.Context) {
+	id := c.Param("id")
+	var Booking []*entity.Booking
+	if err := entity.DB().Raw("SELECT * FROM bookings WHERE member_id = ?", id).Preload("Room").Preload("Room.Type").Preload("Usage").Preload("Member").Find(&Booking).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

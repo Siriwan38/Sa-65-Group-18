@@ -17,7 +17,6 @@ import { UsersInterface } from "../models/IUser";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import DateFnsUtils from "@date-io/date-fns";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { MenuItem } from '@mui/material';
 
@@ -29,9 +28,6 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 function BookingCreate() {
- const [selectedDate, setSelectedDate] = React.useState<Date | null>(
-   new Date()
- );
 
  const  [AddedTime,setAddedTime] = React.useState<Date | null>(new Date());
  const handleAddedTime = (date: Date | null | undefined) => {
@@ -60,9 +56,6 @@ function BookingCreate() {
    }
    setSuccess(false);
    setError(false);
- };
- const handleDateChange = (date: Date | null) => {
-   setSelectedDate(date);
  };
 
  const handleInputChange = (

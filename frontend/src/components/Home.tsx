@@ -35,7 +35,7 @@ function Home() {
               <Tab label="ระบบบันทึกข้อมูลอุปกรณ์" value="4" />
               <Tab label="ระบบสั่งอาหารว่าง" value="5" />
               <Tab label="ระบบชำระเงิน" value="6" />
-              <Tab label="ระบบบันทึกข้อมูลห้อง" value="7" />
+              <Tab label="ระบบบันทึกรายละเอียดห้อง" value="7" />
             </TabList>
           </Box>
           <TabPanel value="1">

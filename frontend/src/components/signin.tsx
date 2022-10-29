@@ -83,7 +83,7 @@ function SignIn() {
           localStorage.setItem("id", res.data.id);
           localStorage.setItem("role", "user");
 
-          window.location.reload()
+          window.location.href = "/";
         } else {
           setError(true);
         }
@@ -106,7 +106,7 @@ function SignIn() {
           localStorage.setItem("id", res.data.id);
           localStorage.setItem("role", "employee");
 
-          window.location.reload()
+          window.location.href = "/"
         } else {
           setError(true);
         }
@@ -166,8 +166,7 @@ function SignIn() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-            
-      *username:ADD@gmail.com, password:123456*
+        
         <form style={{ width: "100%", marginTop: 1 }} noValidate>
           <TextField
             variant="outlined"
@@ -205,7 +204,6 @@ function SignIn() {
             Sign In
           </Button>
         </form>
-       
       </TabPanel>
 
       <TabPanel value={value} index={1}>

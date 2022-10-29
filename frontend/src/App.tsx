@@ -7,23 +7,19 @@ import Home from "./components/Home";
 import SignIn from "./components/signin";
 import BorrowList from "./components/Borrowlist";
 import BorrowListCreate from "./components/BorrowlistCreate";
-
 import Equipments from "./components/Equipments";
 import EquipmentCreate from "./components/EquipmentCreate";
-
 import Food from "./components/Food";
 import FoodorderCreate from "./components/FoodorderCreate";
-
 import Room from "./components/Room";
 import RoomCreate from "./components/RoomCreate";
-
 import Bill from "./components/Bill";
 import BillCreate from "./components/BillCreate";
+import Users from "./components/Users";
+import UserCreate from "./components/UserCreate";
 
 export default function App() {
-
   const [token, setToken] = React.useState<String | null>("");
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -44,6 +40,9 @@ export default function App() {
          <Route path="/bookinghistory" element={<BookingHistory />} />
          <Route path="/bookingcreate" element={<BookingCreate />} />
 
+         <Route path="/user" element={<Users/>}/>
+         <Route path="/usercreate" element={<UserCreate />}/>
+
          <Route path="/borrowlist" element={<BorrowList />} />
          <Route path="/borrowlistcreate" element={<BorrowListCreate />} />
 
@@ -60,7 +59,6 @@ export default function App() {
          <Route path="/billcreate" element={<BillCreate />} />
        </Routes>
      </div>)}
-     
    </Router>
  );
 }
