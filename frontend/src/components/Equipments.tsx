@@ -86,7 +86,7 @@ function Equipments() {
               variant="contained"
               color="primary"
             >
-              สร้างข้อมูล
+              บันทึกข้อมูลอุปกรณ์
             </Button>
           </Box>
         </Box>

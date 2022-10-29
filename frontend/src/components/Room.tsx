@@ -53,7 +53,7 @@ function Rooms() {
               color="primary"
               gutterBottom
             >
-              บันทึกรายละเอียดห้อง
+              ข้อมูลห้อง
             </Typography>
           </Box>
           

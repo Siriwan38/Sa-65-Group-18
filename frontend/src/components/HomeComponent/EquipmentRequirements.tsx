@@ -12,7 +12,7 @@ export default function EquipmentRequirements () {
 
             </p>
             <br />
-            <h4><u>User Story</u> (ระบบบันทึกการจองใช้ห้อง )</h4>
+            <h4><u>User Story</u> (ระบบบันทึกข้อมูลอุปกรณ์ )</h4>
             <p> 
             <b>ในบทบาทของ</b>	พนักงานระบบ<br />
             <b>ฉันต้องการ</b>	บันทึกรายละเอียดข้อมูลอุปกรณ์<br />
